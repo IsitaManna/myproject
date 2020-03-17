@@ -4,11 +4,13 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from django.http import HttpResponse, HttpRequest, JsonResponse
 from recommendationEngine.serializers import UserSerializer, GroupSerializer
 from django.http import HttpResponse
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, schema
+from .models import *
 
 import pandas as pd
 import numpy as np
@@ -19,7 +21,27 @@ pd.set_option('display.width', 1000)
 
 def index(request):
     return HttpResponse("Hello, world. You're at the recommendationEngine index.")
-  
+
+@csrf_exempt
+@api_view(['GET'])  
+def get_customer_response_data(request):
+    all_cust_resps = CustomerResponse.objects.all()
+    custData = []
+    cols = []
+    for item in all_cust_resps:
+        customerRespObj = CustomerResponse.objects.filter(custRespID = item.custRespID)
+        data = list(customerRespObj.values())
+        custData.append(data)
+    for i in custData:
+        qid = i[0]['questionID_id']
+        questionobj = Questions.objects.filter(questionID = qid)
+        columnName = questionobj.values()[0]['Question']
+        cols.append(columnName)
+    df = pd.DataFrame()
+    column_names = np.unique(np.array(cols))
+    df = pd.DataFrame(columns=column_names)
+    print(df)
+    return JsonResponse(custData,safe=False)
 
 def dataPreprocess():
     df = pd.read_excel("/home/sancharig/Documents/Biloba/Sample Survey - Property buying questionnaire (Responses).xlsx")

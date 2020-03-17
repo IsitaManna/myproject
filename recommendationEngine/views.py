@@ -12,6 +12,7 @@ from .customerView import *
 from .questionView import *
 from .responseView import *
 from .ratingView import *
+from .customerResponseView import *
 
 class UserViewSet(viewsets.ModelViewSet):
     """

@@ -57,3 +57,9 @@ update_rating_schema = AutoSchema(manual_fields=[
     coreapi.Field("imageID", required=True, location="form", type="integer"),
     coreapi.Field("rating", required=True, location="form", type="integer")
 ])
+
+create_customer_response_schema = AutoSchema(manual_fields=[
+    coreapi.Field("email", required=True, location="form", type="string"),
+    coreapi.Field("questionID", required=True, location="form", type="integer"),
+    coreapi.Field("responseID", required=True, location="form", type="integer")
+])

@@ -19,5 +19,7 @@ urlpatterns = [
     path('insert-image-rating',views.insertImageRating,name='insertImageRating'),
     path('fetch-image-rating-by-email',views.fetchImageRatingByEmail,name='fetchImageRatingByEmail'),
     path('update-image-rating',views.updateImageRating,name='updateImageRating'),
-    path('fetch-question-responses',views.fetchQuestionResponses,name='fetchQuestionResponses')
+    path('fetch-question-responses',views.fetchQuestionResponses,name='fetchQuestionResponses'),
+    path('create-customer-response',views.create_customer_response,name='create_customer_response'),
+    path('get-customer-response-data',views.get_customer_response_data,name='get_customer_response_data')
 ]
