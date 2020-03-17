@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Laiout</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../css/styles.css">
+        <script src="../js/lifestyle-functions.js"></script>
+        <script src="../js/index.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark static-top top-header">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="http://placehold.it/150x50?text=Logo" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="planTab" onclick="displayTabContent('planTab')" href="#plan">Plan</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="tab-content">
+            <div id="home" class="tab-pane in active" style="margin-top:2%;">
+                <div class="container tab-body">
+                    <ul class="nav nav-pills nav-fill">
+                        <li class="nav-item active">
+                        <a class="nav-item nav-link active" data-toggle="pill" href="#size">Size</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-item nav-link" data-toggle="pill" href="#lifestyle">LifeStyle</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-item nav-link" data-toggle="pill" href="#style">Style</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="size" class="tab-pane in active" style="margin-top:2%;">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                                    <center>
+                                        <h3 style="font-weight: bold;">Tell us about your requirements</h3>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 3%;">
+                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" id="styleQuestionsList">
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>Which square foot apartment is appropriate for you?</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="homeSize">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>No. of total bedrooms</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="bedroomCount">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>No. of total bathrooms</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="bathroomCount">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>No. of total kitchens</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="kitchenCount">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>No. of total doors</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="doorCount">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="form-group">
+                                            <label>No. of total windows</label>
+                                            <input type="text" style="width: 300px;" class="form-control" id="doorCount">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                    <div id="styleCarousel" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#styleCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#styleCarousel" data-slide-to="1"></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="../images/image1.jpg" alt="Chicago" style="width:100%;">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="../images/image2.png" alt="New york" style="width:100%;">
+                                            </div>
+                                        </div>
+                                        <a class="carousel-control-prev" style="color: #BADA55;" href="#styleCarousel" data-slide="prev">
+                                            <span class="carousel-control-prev-icon"></span>
+                                        </a>
+                                        <a class="carousel-control-next" style="color: #BADA55;" href="#styleCarousel" data-slide="next">
+                                            <span class="carousel-control-next-icon"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="lifestyle" class="tab-pane fade" style="margin-top:2%;">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                                    <center>
+                                        <h3 style="font-weight: bold;">Tell us about your life-style</h3>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 3%;">
+                                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12" id="lifeStyleQuestionsList">
+                                    <div class="row" style="margin-left: 3%;">
+                                        <label>Which of these describe you best?</label>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo1" src="../images/floor-plan/plan_demo1.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo1')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo2" src="../images/floor-plan/plan_demo2.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo2')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo3" src="../images/floor-plan/plan_demo3.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo3')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12" style="background-color: beige;">
+                                    <center>
+                                        <label style="font-weight: 500;">Floor Plan Details</label>
+                                    </center>
+                                    <center>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" id="lifestyleCarousel-Inner"> </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="style" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                                    <center>
+                                        <h3 style="font-weight: bold;">Tell us about your style</h3>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 3%;">
+                                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12" id="lifeStyleQuestionsList">
+                                    <div class="row" style="margin-left: 3%;">
+                                        <label>Which of these describe you best?</label>
+                                    </div>
+                                    <div class="row" style="margin-left: 3%;">
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo1" src="../images/floor-plan/plan_demo1.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showStyleImageDetails('plan_demo1')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo2" src="../images/floor-plan/plan_demo2.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showStyleImageDetails('plan_demo2')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                            <div class="hovereffect">
+                                                <input type="checkbox" class="form-check-input" value="">
+                                                <img class="image-style" id="plan_demo3" src="../images/floor-plan/plan_demo3.png" alt="Card image">
+                                                <div class="overlay">
+                                                    <div>
+                                                        <a class="text" onclick="showStyleImageDetails('plan_demo3')" style="text-decoration: underline; cursor: pointer;">
+                                                            Click to see more details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12" style="background-color: beige;">
+                                    <center>
+                                        <label style="font-weight: 500;">Floor Plan Details</label>
+                                    </center>
+                                    <center>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" id="styleCarousel-Inner"> </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="plan" class="tab-pane fade">
+                <div class="container tab-body">
+                    <ul class="nav nav-pills nav-fill">
+                        <li class="nav-item active">
+                        <a class="nav-item nav-link active" data-toggle="pill" href="#size">User Plans</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="size" class="tab-pane in active" style="margin-top:2%;">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                                    <center>
+                                        <h3 style="font-weight: bold;">Rate your plans</h3>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">
+            <span>
+                ©2020 BY BILOBA ARCHITECTURE, PLLC
+            </span>
+        </div>
+    </footer>
+
+</html>
+
+
+
+
+
+                            

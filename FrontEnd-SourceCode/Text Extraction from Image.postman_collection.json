@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "e286b74c-b8a8-460a-b7c1-d6cd11c51407",
+		"name": "Text Extraction from Image",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Convert image from URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apikey",
+						"value": "ab491db7e288957"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "language",
+							"value": "eng",
+							"type": "text"
+						},
+						{
+							"key": "isOverlayRequired",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/sancharig/Documents/Biloba/Roosevelt Second Floor.pdf"
+						},
+						{
+							"key": "iscreatesearchablepdf",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "issearchablepdfhidetextlayer",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "filetype",
+							"value": "jpg",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.ocr.space/parse/image",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ocr",
+						"space"
+					],
+					"path": [
+						"parse",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/recommendationEngine/register-customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sanchari.gautam@gmail.com\",\n\t\"fName\":\"Sanchari\",\n\t\"lName\":\"Gautam\",\n\t\"password\":1234,\n\t\"contactNo\":9051952059,\n\t\"city\":\"Kolkata\",\n\t\"country\":\"India\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/recommendationEngine/register-customer",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"recommendationEngine",
+						"register-customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sanchari.gautam@gmail.com\",\n\t\"fName\":\"Sanchari\",\n\t\"lName\":\"Gautam\",\n\t\"password\":1234,\n\t\"contactNo\":9051952059,\n\t\"city\":\"Kolkata\",\n\t\"country\":\"India\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/recommendationEngine/register-customer",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"recommendationEngine",
+						"register-customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch-customer-by-id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "sanchari.gautam@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/recommendationEngine/fetch-customer-by-id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"recommendationEngine",
+						"fetch-customer-by-id"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
