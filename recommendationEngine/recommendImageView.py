@@ -15,6 +15,7 @@ from .models import *
 import pandas as pd
 import numpy as np
 import math
+import time
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
@@ -27,21 +28,40 @@ def index(request):
 def get_customer_response_data(request):
     all_cust_resps = CustomerResponse.objects.all()
     custData = []
-    cols = []
+    col_ids = []
     for item in all_cust_resps:
         customerRespObj = CustomerResponse.objects.filter(custRespID = item.custRespID)
         data = list(customerRespObj.values())
         custData.append(data)
     for i in custData:
         qid = i[0]['questionID_id']
-        questionobj = Questions.objects.filter(questionID = qid)
-        columnName = questionobj.values()[0]['Question']
-        cols.append(columnName)
-    df = pd.DataFrame()
-    column_names = np.unique(np.array(cols))
-    df = pd.DataFrame(columns=column_names)
-    print(df)
-    return JsonResponse(custData,safe=False)
+        col_ids.append(qid)
+    custidList = []
+    for cust in custData:
+        custid = cust[0]['custID_id']
+        custidList.append(custid)
+    column_ids = np.unique(np.array(col_ids))
+    cust_ids = np.unique(np.array(custidList))
+    respData = []
+    for customer in cust_ids:
+        customerDict = {}
+        custEmail = Customer.objects.get(custID = customer).email
+        customerDict["Email Address"] = custEmail
+        custRespObj = CustomerResponse.objects.filter(custID = customer)
+        dataList = CustomerResponse.objects.filter(custID = customer).values()
+        timeList = []
+        for t in dataList:
+            timeList.append(t['timestamp'])
+        customerDict["Timestamp"] = max(timeList)
+        for col in column_ids:
+            question = Questions.objects.get(questionID = col).Question
+            responseIDbycust = CustomerResponse.objects.get(custID=customer,questionID=col).responseID_id
+            respByCust = Responses.objects.get(responseID=responseIDbycust).response
+            customerDict[question] = respByCust
+        respData.append(customerDict)
+    df = pd.DataFrame(respData)
+    # print(df)
+    return JsonResponse(respData,safe=False)
 
 def dataPreprocess():
     df = pd.read_excel("/home/sancharig/Documents/Biloba/Sample Survey - Property buying questionnaire (Responses).xlsx")
