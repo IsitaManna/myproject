@@ -1,4 +1,6 @@
-const apiBackendBaseUrl = "http://192.168.1.13:8000/recommendation-engine";
+// const apiBackendBaseUrl = "http://192.168.1.13:8000/recommendation-engine";
+const apiBackendBaseUrl = "http://localhost:8000/recommendation-engine";
+
 
 $(document).ready(function(){
     $("#signIn").click(function(event){
