@@ -1,0 +1,38 @@
+
+.top-header{
+    background-color: #e2fac3;
+}
+.tab-body{
+    margin-top: 1%;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    color: #000000;
+    background-color: #ceff9a;
+}
+a {
+    color: #6D7377;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: #BADA55;
+}
+.hovereffect:hover .overlay {
+    opacity: 1;
+  }
+
+
+.rating {
+    float: left;
+}
+.rating span {
+    font-size: 25px;
+    cursor: pointer;
+    float: right;
+}
+
+.rating span:hover, .rating span:hover ~ span{
+    color: red;
+}
