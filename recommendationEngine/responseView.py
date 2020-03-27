@@ -20,11 +20,11 @@ def insertResponse(request):
     answer = request.data['answer']
     # newResponseObj = Responses(questionID = Questions.objects.get(questionID = QuestionID), response =  answer)
     if len(answer) == 1:
-        newResponseObj = Responses(questionID = Questions.objects.get(questionID = questionID), response=  answer)
+        newResponseObj = Response(questionID = Question.objects.get(questionID = questionID), response=  answer)
         newResponseObj.save()
     else:
         for ans in answer:
-            newResponseObj = Responses(questionID = Questions.objects.get(questionID = questionID), response=  ans)
+            newResponseObj = Response(questionID = Question.objects.get(questionID = questionID), response=  ans)
             newResponseObj.save()
     status = 400
     message = "Response inserted successfully!"
@@ -35,9 +35,9 @@ def insertResponse(request):
 @api_view(['GET'])
 def fetchAllResponses(request):
     respData = []
-    all_response = Responses.objects.all()
+    all_response = Response.objects.all()
     for resp in all_response:
-        responseObj = Responses.objects.filter(questionID = resp.questionID)
+        responseObj = Response.objects.filter(questionID = resp.questionID)
         data = list(responseObj.values())
         respData.append(data)
 
@@ -48,7 +48,7 @@ def fetchAllResponses(request):
 @schema(fetch_response_schema)
 def fetchResponsesByID(request):
     questionID = request.data['questionID']
-    responseObj = Responses.objects.filter(questionID = questionID)
+    responseObj = Response.objects.filter(questionID = questionID)
     data = list(responseObj.values())
     return JsonResponse(data,safe=False)
 
@@ -57,25 +57,27 @@ def fetchResponsesByID(request):
 def fetchQuestionResponses(request):
     quesRespData = []
     questionData = []
-    all_questions = Questions.objects.all()
-    for question in all_questions:
-        questionObj = Questions.objects.filter(Question = question.Question)
+    all_questions = Question.objects.all()
+    for q in all_questions:
+        questionObj = Question.objects.filter(question=q.question)
         data = list(questionObj.values())
         questionData.append(data)
+        # print(data)
     for ques in questionData:
         quesRespDict = {}
         quesDict = {}
-        questionID = ques[0]['questionID']
+        questionID = ques[0]['id']
         quesDict['QuesID'] = questionID
-        quesDict['question'] = ques[0]['Question']
-        responseObj = Responses.objects.filter(questionID = questionID)
-        print(responseObj)
+        # print(ques)
+        quesDict['question'] = ques[0]['question']
+        responseObj = Answer.objects.filter(question_id=questionID)
+        # print(responseObj)
         respData = list(responseObj.values())
         responses = []
         for resp in respData:
             respDict = {}
-            respDict['ResponseID'] = resp['responseID']
-            respDict['response'] = resp['response']
+            respDict['ResponseID'] = resp['id']
+            respDict['response'] = resp['answer']
             responses.append(respDict)
         quesRespDict['Question'] = quesDict
         quesRespDict['answer'] = responses

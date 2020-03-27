@@ -24,11 +24,11 @@ def index(request):
     return HttpResponse("Hello, world. You're at the recommendationEngine index.")
 
 def get_customer_response_data():
-    all_cust_resps = CustomerResponse.objects.all()
+    all_cust_resps = UserResponse.objects.all()
     custData = []
     col_ids = []
     for item in all_cust_resps:
-        customerRespObj = CustomerResponse.objects.filter(custRespID = item.custRespID)
+        customerRespObj = UserResponse.objects.filter(custRespID = item.custRespID)
         data = list(customerRespObj.values())
         custData.append(data)
     for i in custData:
@@ -45,16 +45,16 @@ def get_customer_response_data():
         customerDict = {}
         custEmail = Customer.objects.get(custID = customer).email
         customerDict["Email Address"] = custEmail
-        custRespObj = CustomerResponse.objects.filter(custID = customer)
-        dataList = CustomerResponse.objects.filter(custID = customer).values()
+        custRespObj = UserResponse.objects.filter(custID = customer)
+        dataList = UserResponse.objects.filter(custID = customer).values()
         timeList = []
         for t in dataList:
             timeList.append(t['timestamp'])
         customerDict["Timestamp"] = max(timeList)
         for col in column_ids:
-            question = Questions.objects.get(questionID = col).Question
-            responseIDbycust = CustomerResponse.objects.get(custID=customer,questionID=col).responseID_id
-            respByCust = Responses.objects.get(responseID=responseIDbycust).response
+            question = Question.objects.get(questionID = col).Question
+            responseIDbycust = UserResponse.objects.get(custID=customer,questionID=col).responseID_id
+            respByCust = Response.objects.get(responseID=responseIDbycust).response
             customerDict[question] = respByCust
         respData.append(customerDict)
     df = pd.DataFrame(respData)

@@ -36,8 +36,9 @@ ALLOWED_HOSTS = "*"
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
 }
+
 
 INSTALLED_APPS = [
     'recommendationEngine.apps.recommendationEngineConfig',
@@ -47,8 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
-    'corsheaders'
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +94,7 @@ WSGI_APPLICATION = 'Biloba.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
-        'NAME' : os.getenv('MYSQL_DB'),
+        'NAME' : 'bilobadb2',#os.getenv('MYSQL_DB'),
         'USER' : os.getenv('MYSQL_USER'),
         'PASSWORD' : os.getenv('MYSQL_PASS'),
         'HOST' : os.getenv('MYSQL_HOST'),
@@ -100,9 +102,11 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'recommendationEngine.User'
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -19,9 +19,9 @@ def insertImageRating(request):
     email = request.data['email']
     imageID = request.data['imageID']
     rating = request.data['rating']
-    checkExistingCustomer = Customer.objects.filter(email = email).exists()
+    checkExistingCustomer = User.objects.filter(username=email).exists()
     if(checkExistingCustomer == True):
-        newDataObj = Ratings(email = Customer.objects.get(email=email), imageID = imageID, rating = rating)
+        newDataObj = Rating(user=User.objects.get(username=email),imageID=imageID,rating=rating)
         newDataObj.save()
         message = "Data successfully entered"
         status = 200
@@ -36,9 +36,9 @@ def insertImageRating(request):
 @schema(fetch_customer_schema)
 def fetchImageRatingByEmail(request):
     email = request.data['email']
-    checkExisting = Ratings.objects.filter(email = email).exists()
+    checkExisting = Rating.objects.filter(email = email).exists()
     if(checkExisting == True):
-        ratingObj = Ratings.objects.filter(email = email)
+        ratingObj = Rating.objects.filter(email = email)
         data = list(ratingObj.values())
         return JsonResponse(data,safe=False)
     else:
@@ -56,9 +56,9 @@ def updateImageRating(request):
     rating = request.data['rating']
     checkExistingCustomer = Customer.objects.filter(email=email).exists()
     if(checkExistingCustomer==True):
-        checkExistingRatings = Ratings.objects.filter(email = Customer.objects.get(email = email), imageID = imageID).exists()
+        checkExistingRatings = Rating.objects.filter(email = Customer.objects.get(email = email), imageID = imageID).exists()
         if(checkExistingCustomer == True and checkExistingRatings == True):
-            Ratings.objects.filter(email = Customer.objects.get(email = email), imageID = imageID).update(rating = rating)
+            Rating.objects.filter(email = Customer.objects.get(email = email), imageID = imageID).update(rating = rating)
             message = "Data successfully updated"
             status = 200
         else:
