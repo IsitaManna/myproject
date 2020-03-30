@@ -70,6 +70,7 @@ def fetchQuestionResponses(request):
         quesDict['QuesID'] = questionID
         # print(ques)
         quesDict['question'] = ques[0]['question']
+        quesDict['type'] = ques[0]['question_type']
         responseObj = Answer.objects.filter(question_id=questionID)
         # print(responseObj)
         respData = list(responseObj.values())

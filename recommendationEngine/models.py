@@ -20,7 +20,14 @@ class User(AbstractUser):
 #     createdDate = models.DateTimeField(null = True)
 
 class Question(models.Model):
+    QUALITATIVE = 'Qualitative'
+    QUANTITATIVE = 'Quantitative'
+    QUESTION_TYPES = [
+        (QUALITATIVE, 'Qualitative'),
+        (QUANTITATIVE, 'Quantitative')
+    ]
     question = models.CharField(max_length=255, unique=True)
+    question_type = models.CharField(max_length=30, choices=QUESTION_TYPES, default=QUANTITATIVE)
 
 class Rating(models.Model):
     user = models.ForeignKey(User, related_name='user_rating', on_delete=models.CASCADE)

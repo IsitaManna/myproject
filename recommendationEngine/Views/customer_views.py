@@ -66,8 +66,11 @@ class CustomerLoginView(APIView):
                 response = {
                     "message": "Login Successful!",
                     "username": user.username,
+                    "first_name": user.first_name,
+                    "last_name": user.last_name,
                     "user_id": user.id,
-                    "token": f'Token {user.auth_token}'
+                    "token": f'Token {user.auth_token}',
+                    'status': 200
                 }
                 return Response(data=response,status=200)
 
@@ -89,11 +92,11 @@ class CustomerResponseView(APIView):
     def post(self, request):
         print(request.data)
         bulk_ins = []
-        for i in request.data:
+        for i in request.data['answers']:
             bulk_ins.append(UserResponse(
                 user_id=request.user.id,
                 question_id=i["QuesID"],
                 answer_id=i["ResponseID"]
             ))
         UserResponse.objects.bulk_create(bulk_ins)
-        return Response(data={"message":"Submisson Successful"}, status=201)
+        return Response(data={"message":"Submisson Successful", 'status':201}, status=201)
