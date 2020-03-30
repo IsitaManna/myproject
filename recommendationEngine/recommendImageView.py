@@ -28,33 +28,33 @@ def get_customer_response_data():
     custData = []
     col_ids = []
     for item in all_cust_resps:
-        customerRespObj = UserResponse.objects.filter(custRespID = item.custRespID)
+        customerRespObj = UserResponse.objects.filter(id=item.id)
         data = list(customerRespObj.values())
         custData.append(data)
     for i in custData:
-        qid = i[0]['questionID_id']
+        qid = i[0]['question_id']
         col_ids.append(qid)
     custidList = []
     for cust in custData:
-        custid = cust[0]['custID_id']
+        custid = cust[0]['user_id']
         custidList.append(custid)
     column_ids = np.unique(np.array(col_ids))
     cust_ids = np.unique(np.array(custidList))
     respData = []
     for customer in cust_ids:
         customerDict = {}
-        custEmail = Customer.objects.get(custID = customer).email
+        custEmail = User.objects.get(id = customer).username
         customerDict["Email Address"] = custEmail
-        custRespObj = UserResponse.objects.filter(custID = customer)
-        dataList = UserResponse.objects.filter(custID = customer).values()
+        # custRespObj = UserResponse.objects.filter(user_id=customer)
+        dataList = UserResponse.objects.filter(user_id=customer).values()
         timeList = []
         for t in dataList:
-            timeList.append(t['timestamp'])
+            timeList.append(t['created_at'])
         customerDict["Timestamp"] = max(timeList)
         for col in column_ids:
-            question = Question.objects.get(questionID = col).Question
-            responseIDbycust = UserResponse.objects.get(custID=customer,questionID=col).responseID_id
-            respByCust = Response.objects.get(responseID=responseIDbycust).response
+            question = Question.objects.get(id=col).question
+            responseIDbycust = UserResponse.objects.get(user_id=customer,question_id=col).answer_id
+            respByCust = Answer.objects.get(id=responseIDbycust).answer
             customerDict[question] = respByCust
         respData.append(customerDict)
     df = pd.DataFrame(respData)

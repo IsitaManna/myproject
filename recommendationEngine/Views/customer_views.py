@@ -90,7 +90,7 @@ class CustomerResponseView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        print(request.data)
+        # print(request.data)
         bulk_ins = []
         for i in request.data['answers']:
             bulk_ins.append(UserResponse(

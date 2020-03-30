@@ -39,6 +39,9 @@ class Answer(models.Model):
     answer = models.CharField(max_length=100)
 
 class UserResponse(models.Model):
+    class Meta:
+        unique_together = ['user', 'question']
+
     user = models.ForeignKey(User, related_name='user_response', on_delete=models.CASCADE)
     question = models.ForeignKey(Question, related_name='+', on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, related_name='+', on_delete=models.CASCADE)
