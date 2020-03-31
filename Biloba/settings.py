@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +28,8 @@ SECRET_KEY = '!@1!8*!=42okri%&j_&^0cor1)%!6z18u1i%l%e+$%)$nnbpoa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13"]
+# ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13"]
+ALLOWED_HOSTS = "*"
 
 
 # Application definition
@@ -88,10 +92,10 @@ WSGI_APPLICATION = 'Biloba.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'bilobadb',
-        'USER' : 'root',
-        'PASSWORD' : 'root',
-        'HOST' : '127.0.0.1',
+        'NAME' : os.getenv('MYSQL_DB'),
+        'USER' : os.getenv('MYSQL_USER'),
+        'PASSWORD' : os.getenv('MYSQL_PASS'),
+        'HOST' : os.getenv('MYSQL_HOST'),
         'PORT' : '3306'
     }
 }
