@@ -1,5 +1,5 @@
 // const apiBackendBaseUrl = "http://192.168.1.13:8000/recommendation-engine";
-const apiBackendBaseUrl = "http://localhost:8000/recommendation-engine";
+const apiBackendBaseUrl = "http://e9a8b8cc.ngrok.io/recommendation-engine";
 
 
 $(document).ready(function(){
@@ -9,7 +9,7 @@ $(document).ready(function(){
         var password = document.login.password.value;
         var loginData = {
           email : email,
-          password : password
+          password : password 
         }
         console.log(loginData);
         var emailValidationCheck = validateEmail(email);
@@ -25,6 +25,8 @@ $(document).ready(function(){
             };
             
             $.ajax(settings).done(function (response) {
+              console.log("Response in login ----------",response.status,response);
+             
               if(response["status"] == 404){
                 swal({
                   title: "Error",
@@ -33,6 +35,11 @@ $(document).ready(function(){
                 });
               }
               if(response["status"] == 200){
+                localStorage.setItem("username",response["username"]);
+                localStorage.setItem("userid",response["user_id"]);
+                localStorage.setItem("token",response["token"]);
+                localStorage.setItem("name",response["first_name"]);
+                // createJwtToken(1200,email);
                 swal({
                   title: "Success",
                   text: response["message"],
@@ -97,7 +104,8 @@ function registerUser(){
             
           $.ajax(settings)
             .done(function (response) {
-              if(response["status"] == 200){
+              console.log("response in registration--------",response);
+              if(response["status"] == 201){
                 swal({
                   title: "Success",
                   text: response["message"],
@@ -114,13 +122,13 @@ function registerUser(){
               }
             });
     
-          $.ajax(settings).fail(function (response) {
-            swal({
-              title: "Error",
-              text: "Error occured",
-              icon: "error",
-            });
-          }); 
+          // $.ajax(settings).fail(function (response) {
+          //   swal({
+          //     title: "Error",
+          //     text: "Error occured",
+          //     icon: "error",
+          //   });
+          // }); 
         }
       }
       else{
@@ -153,5 +161,52 @@ function validateEmail(email){
     return false;
   }
 }
+
+function base64url(source) {
+  // Encode in classical base64
+  encodedSource = CryptoJS.enc.Base64.stringify(source);
+
+  // Remove padding equal characters
+  encodedSource = encodedSource.replace(/=+$/, '');
+
+  // Replace characters according to base64url specifications
+  encodedSource = encodedSource.replace(/\+/g, '-');
+  encodedSource = encodedSource.replace(/\//g, '_');
+
+  return encodedSource;
+}
+
+function createJwtToken(id,username){
+  var header = {
+    "alg": "HS256",
+    "typ": "JWT"
+  };
+  
+  var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+  var encodedHeader = base64url(stringifiedHeader);
+  
+  var data = {
+    "id": id,
+    "username": username
+  };
+  
+  var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+  var encodedData = base64url(stringifiedData);
+  
+  var token = encodedHeader + "." + encodedData;
+  var secret = "My very confidential secret!";
+
+var signature = CryptoJS.HmacSHA256(token, secret);
+signature = base64url(signature);
+
+var signedToken = token + "." + signature;
+
+window.localStorage.setItem("token", signedToken);
+window.localStorage.setItem("username", username);
+return signedToken;
+
+
+}
+
 
 

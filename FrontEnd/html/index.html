@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -35,43 +36,63 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+                &nbsp;&nbsp;
+                <span id="username" style="font-size: 18px;"></span>
+                &nbsp;
+                <a onclick="logout()" href="#">
+                    <!-- <small><strong>Logout</strong></small> -->
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+               
         </nav>
         <div class="tab-content">
-            <div id="home" class="tab-pane in active" style="margin-top:2%;">
+            <div id="home" class="tab-pane in active">
                 <div class="container tab-body">
                     <ul class="nav nav-pills nav-fill">
-                        <li class="nav-item active">
-                        <a class="nav-item nav-link active" data-toggle="pill" href="#size">Size</a>
+                        <li class="nav-item active" >
+                        <a id="Quantitativetab" class="nav-item nav-link active" data-toggle="pill" href="#size">Quantitative</a>
+                        </li>
+                        <li  class="nav-item">
+                        <a id="Qualitativetab" class="nav-item nav-link"  data-toggle="pill" href="#lifestyle">Qualitative</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-item nav-link" data-toggle="pill" href="#lifestyle">LifeStyle</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-item nav-link" data-toggle="pill" href="#style">Style</a>
+                        <a class="nav-item nav-link"  data-toggle="pill" href="#style">Style</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div id="size" class="tab-pane in active" style="margin-top:2%;">
+                        <div id="size" class="tab-pane in active" style="margin-top:1%;">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                                     <center>
-                                        <h3 style="font-weight: bold;">Tell us about your requirements</h3>
+                                        <h4 style="font-weight: bold;">Tell us about your requirements</h4>
                                     </center>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" id="styleQuestionsList">
+                            <div class="row" style="margin-top: 1%;">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="styleQuestionsList">
                                     
                                     <form method="POST"  id="question-form" name = "questionform">
+                                    <!-- <div class="card" >
+                                        <div class="card-body" style="padding-bottom : 1px">
+                                            <div class ="row">
+                                            <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12"> 
+                                            some text
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                                <img src="../images/image1.jpg" alt="Chicago" style="width:100%; float : right;">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div> -->
                                     <span id="question"></span>
+
                                     <div class="text-center">
-                                    <button type="button" onclick="submitResponse()" class="btn btn-success">Submit</button>
+                                    <button type="button" onclick="nextTab()" class="btn btn-success">Next</button>
                                     </div>
                                 </form>
 
                                 </div>
-                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <!-- <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                     <div id="styleCarousel" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
                                             <li data-target="#styleCarousel" data-slide-to="0" class="active"></li>
@@ -92,65 +113,27 @@
                                             <span class="carousel-control-next-icon"></span>
                                         </a>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                        <div id="lifestyle" class="tab-pane fade" style="margin-top:2%;">
+                        <div id="lifestyle" class="tab-pane fade" style="margin-top:1%;">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                                     <center>
-                                        <h3 style="font-weight: bold;">Tell us about your life-style</h3>
+                                        <h4 style="font-weight: bold;">Tell us about your life-style</h4>
                                     </center>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12" id="lifeStyleQuestionsList">
-                                    <div class="row" style="margin-left: 3%;">
-                                        <label>Which of these describe you best?</label>
-                                    </div>
-                                    <div class="row" style="margin-left: 3%;">
-                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
-                                            <div class="hovereffect">
-                                                <input type="checkbox" class="form-check-input" value="">
-                                                <img class="image-style" id="plan_demo1" src="../images/floor-plan/plan_demo1.png" alt="Card image">
-                                                <div class="overlay">
-                                                    <div>
-                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo1')" style="text-decoration: underline; cursor: pointer;">
-                                                            Click to see more details
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="row" style="margin-top: 1%;">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="lifeStyleQuestionsList">
+                                    
+                                
+                                    <span id="qualitative"></span>
+                                    <div class="text-center">
+                                        <button type="button" onclick="submitResponse()" class="btn btn-success">Submit</button>
                                         </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
-                                            <div class="hovereffect">
-                                                <input type="checkbox" class="form-check-input" value="">
-                                                <img class="image-style" id="plan_demo2" src="../images/floor-plan/plan_demo2.png" alt="Card image">
-                                                <div class="overlay">
-                                                    <div>
-                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo2')" style="text-decoration: underline; cursor: pointer;">
-                                                            Click to see more details
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
-                                            <div class="hovereffect">
-                                                <input type="checkbox" class="form-check-input" value="">
-                                                <img class="image-style" id="plan_demo3" src="../images/floor-plan/plan_demo3.png" alt="Card image">
-                                                <div class="overlay">
-                                                    <div>
-                                                        <a class="text" onclick="showLifeStyleImageDetails('plan_demo3')" style="text-decoration: underline; cursor: pointer;">
-                                                            Click to see more details
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12" style="background-color: beige;">
+                                <!-- <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12" style="background-color: beige;">
                                     <center>
                                         <label style="font-weight: 500;">Floor Plan Details</label>
                                     </center>
@@ -159,22 +142,24 @@
                                             <div class="carousel-item active" id="lifestyleCarousel-Inner"> </div>
                                         </div>
                                     </center>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                        <div id="style" class="tab-pane fade">
+                        <div id="style" class="tab-pane fade" style="margin-top:1%;">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                                     <center>
-                                        <h3 style="font-weight: bold;">Tell us about your style</h3>
+                                        <h4 style="font-weight: bold;">Tell us about your style</h4>
                                     </center>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 3%;">
+                            <div class="row" style="margin-top: 1%;">
                                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12" id="lifeStyleQuestionsList">
+
                                     <div class="row" style="margin-left: 3%;">
                                         <label>Which of these describe you best?</label>
                                     </div>
+
                                     <div class="row" style="margin-left: 3%;">
                                         <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
                                             <div class="hovereffect">
@@ -258,7 +243,7 @@
     <footer class="page-footer font-small blue">
         <div class="footer-copyright text-center py-3">
             <span>
-                ©2020 BY BILOBA ARCHITECTURE, PLLC
+                ©2020 BY LAIOUT INC.
             </span>
         </div>
     </footer>
