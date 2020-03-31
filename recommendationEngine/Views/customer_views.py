@@ -22,7 +22,7 @@ class CustomerSignupView(APIView):
         # createdDate = time.strftime('%Y-%m-%d %H:%M:%S')
         if User.objects.filter(username=email).exists():
         # if(checkExistingCustomer == True):
-            message = "Customer already exists"
+            response = {"message":"Customer already exists", "status":409}
             status = 409
         else:
             user = User(
@@ -40,7 +40,8 @@ class CustomerSignupView(APIView):
                 "message": "User successfully registered",
                 "username": user.username,
                 "user_id": user.id,
-                "token": f'Token {tk.key}'
+                "token": f'Token {tk.key}',
+                "status": 201
             }
             # message = 
             status = 201
@@ -90,13 +91,12 @@ class CustomerResponseView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # print(request.data)
-        bulk_ins = []
         for i in request.data['answers']:
-            bulk_ins.append(UserResponse(
+            
+            UserResponse.objects.update_or_create(
+                question_id=i['QuesID'],
                 user_id=request.user.id,
-                question_id=i["QuesID"],
-                answer_id=i["ResponseID"]
-            ))
-        UserResponse.objects.bulk_create(bulk_ins)
+                defaults={'answer_id': i['ResponseID']}
+            )
+
         return Response(data={"message":"Submisson Successful", 'status':201}, status=201)
