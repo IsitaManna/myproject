@@ -58,7 +58,6 @@ def get_customer_response_data():
             customerDict[question] = respByCust
         respData.append(customerDict)
     df = pd.DataFrame(respData)
-    # print(df)
     return df
 
 def dataPreprocess():
@@ -70,7 +69,8 @@ def dataPreprocess():
     for c in columns:
         if c not in ["Email Address","Timestamp"]:
             cat_cols.append(c)
-    dummies = pd.get_dummies(df[cat_cols],drop_first=True)
+    dummies = pd.get_dummies(df[cat_cols],drop_first=False)
+    # print('Dummies ', dummies)
     df = pd.concat([df,dummies],axis = 1)
     df = df.drop(cat_cols,axis = 1)
     dcols = df.columns

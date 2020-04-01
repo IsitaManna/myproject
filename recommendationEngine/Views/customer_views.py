@@ -1,10 +1,13 @@
+import json
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from recommendationEngine.models import User, UserResponse
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
+from recommendationEngine.models import User, UserResponse
+from recommendationEngine.Utils.vectorize import get_vectors
 
 
 class CustomerSignupView(APIView):
@@ -98,5 +101,15 @@ class CustomerResponseView(APIView):
                 user_id=request.user.id,
                 defaults={'answer_id': i['ResponseID']}
             )
+        user_response_list = list(UserResponse.objects.filter(
+            user_id=request.user.id
+        ).values_list('answer_id', flat=True))
+        
+        vec = get_vectors(user_response_list)
+
+        v_dict = {"Vector": vec}
+
+        request.user.vector = json.dumps(v_dict)
+        request.user.save()
 
         return Response(data={"message":"Submisson Successful", 'status':201}, status=201)
