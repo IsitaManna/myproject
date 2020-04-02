@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'Biloba.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'bilobadb2',#os.getenv('MYSQL_DB'),
+        'NAME' : os.getenv('MYSQL_DB'),
         'USER' : os.getenv('MYSQL_USER'),
         'PASSWORD' : os.getenv('MYSQL_PASS'),
         'HOST' : os.getenv('MYSQL_HOST'),

@@ -15,7 +15,6 @@ class QuestionResponseView(APIView):
         question_list = []
         user_responses = UserResponse.objects.filter(user=request.user)
         
-        
         for question in Question.objects.all().prefetch_related('question_response'):
             q_dict = model_to_dict(question)
             a_dict = list(question.question_response.all().values())

@@ -11,8 +11,6 @@ from recommendationEngine.Utils.vectorize import get_vectors
 
 
 class CustomerSignupView(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
 
     def post(self, request):
         email = request.data['email'].strip()
@@ -22,9 +20,9 @@ class CustomerSignupView(APIView):
         contactNo = request.data['contactNo']
         city = request.data['city']
         country = request.data['country']
-        # createdDate = time.strftime('%Y-%m-%d %H:%M:%S')
+
         if User.objects.filter(username=email).exists():
-        # if(checkExistingCustomer == True):
+
             response = {"message":"Customer already exists", "status":409}
             status = 409
         else:
@@ -46,27 +44,23 @@ class CustomerSignupView(APIView):
                 "token": f'Token {tk.key}',
                 "status": 201
             }
-            # message = 
+
             status = 201
-        # response = {"message":message}
+
         return Response(data=response, status=status)
 
 
 
 
 class CustomerLoginView(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
 
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
         if User.objects.filter(username=email).exists():
-        # if checkExistingCustomer == True:
             user = User.objects.get(username=email)
-            # 
+
             if user.check_password(password):
-                # tk = Token.objects.create(user=user)
                 response = {
                     "message": "Login Successful!",
                     "username": user.username,
