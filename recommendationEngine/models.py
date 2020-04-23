@@ -41,3 +41,8 @@ class UserResponse(models.Model):
     question = models.ForeignKey(Question, related_name='+', on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, related_name='+', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+
+class OCRImage(models.Model):
+    image_path = models.CharField(max_length=250,null=True)
+    data_dict = models.TextField(null=True)
