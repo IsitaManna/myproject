@@ -8,10 +8,10 @@ import glob
 
 
 def ocr_extract_from_images():
-    floorTags=['balcony/ porch','bath','bedroom','bonus','closet','deck/outdoor space','den','dining room',
-           'door','entry','firepit/fireplace','garage','hot tub','kitche/living room','kitchen','laundry',
-           'living room','mudroom','office','pantry','stair','storage','sunroom','utility','WIC','window',
-           'master bedroo','living/ dining','kitchen/dining','hall','linen','Misc/cinema']
+    floorTags=["balcony/ porch","bath","bedroom","bonus","closet","deck/outdoor space","den","dining room",
+           "door","entry","firepit/fireplace","garage","hot tub","kitchen/living room","kitchen","laundry",
+           "living room","mudroom","office","pantry","stair","storage","sunroom","utility","WIC","window",
+           "living/ dining","kitchen/dining","hall","linen","Misc/cinema"]
     rootdir = "/home/sancharig/Documents/Biloba/GAN Model/images_onedrive/done/"
     # basedir = "/home/sancharig/Documents/Biloba/GAN Model/updated house/"
     imgLists = glob.glob(rootdir+"*.jpg")
@@ -44,6 +44,7 @@ def ocr_extract_from_images():
     #     print(tags_API)
     #     print("__________________")
         dictAPI = {}
+        tagdict = {}
         dictAPI ['image_name'] = imgname
         for i in floorTags:
             count1 = 0
@@ -56,13 +57,9 @@ def ocr_extract_from_images():
                     if item in i.upper():
     #                     print(item)
                         count1 += 1
-            dictAPI[i]=count1
-        # print(dictAPI)    
-        lenOfZero = 0
-        for f in dictAPI.keys():
-            if dictAPI[f] == 0:
-                lenOfZero += 1
-        if lenOfZero!= len(floorTags):
-            imgtagslist.append(dictAPI)
+            tagdict[i]=count1
+        dictAPI['tag_vector'] = tagdict
+        print(dictAPI) 
+        imgtagslist.append(dictAPI)
     ocrimages = pd.DataFrame(imgtagslist)
     ocrimages.to_csv("ocrimages.csv")

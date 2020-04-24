@@ -11,11 +11,13 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, schema
 from .models import *
-
+from .custom_schema import recommend_images_based_on_input
 import pandas as pd
 import numpy as np
 import math
 import time
+import json 
+from scipy.spatial import distance
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
@@ -140,4 +142,68 @@ def recommendImagesBasedOnRating(request):
     recommendedImgdf = recommendedImgdf.sort_values(by='RatingMean',ascending=False)
     response = {'status':200,'data':recommendedImgdf['Image'][:3]}
     return Response(response)
+    
+@csrf_exempt
+@api_view(['POST'])
+@schema(recommend_images_based_on_input)
+def recommendImagesBasedOnInput(request):
+    ocrimages = pd.read_csv("/home/sancharig/Documents/Biloba/ocrimages.csv")
+    floorTags=["balcony/ porch","bath","bedroom","bonus","closet","deck/outdoor space","den","dining room",
+           "door","entry","firepit/fireplace","garage","hot tub","kitchen/living room","kitchen","laundry",
+           "living room","mudroom","office","pantry","stair","storage","sunroom","utility","WIC","window",'master bedroo',
+           "living/ dining","kitchen/dining","hall","linen","Misc/cinema"]
+    customer = request.data['CustID']
+    dataList = UserResponse.objects.filter(user_id=customer).values()
+    # print(dataList)
+    custDict = {}
+    for tag in floorTags:
+        if (tag == "closet") or (tag == "dining room") or (tag == "kitchen") or (tag == "living room"):
+            custDict[tag] = 1
+        else:
+            custDict[tag] = 0
+    for data in dataList:
+        if data['question_id'] == 4:
+            custDict["bedroom"] = int(Answer.objects.get(id=data["answer_id"]).answer)
+        elif data['question_id'] == 5:
+            custDict["bath"] = int(Answer.objects.get(id=data["answer_id"]).answer)
+        elif data['question_id'] == 7:
+            custDict["living room"] = 1
+            custDict['den'] = 1
+        elif data['question_id'] == 9:
+            ans = Answer.objects.get(id=data["answer_id"]).answer
+            if ans.lower() == "yes":
+                custDict["firepit/fireplace"] = 1
+        elif data['question_id'] == 10:
+            ans = Answer.objects.get(id=data["answer_id"]).answer
+            if ans.lower() == "yes":
+                custDict["bonus"] = 1
+        elif data['question_id'] == 11:
+            ans = Answer.objects.get(id=data["answer_id"]).answer
+            if ans.lower() == "yes":
+                custDict["office"] = 1
+        elif data['question_id'] == 8:
+            ans = Answer.objects.get(id=data["answer_id"]).answer
+            if ans == "Mud Room":
+                custDict['mudroom'] = 1
+            elif ans == "Small Laundry Area":
+                custDict["laundry"] = 1
+    # print(np.array(custDict.values()))
+    custvect = list(custDict.values())
+    # print(custDict.keys())
+    imglist = []
+    imgdistList = []
+    for img in ocrimages['image_name']:
+        # imgdist = {}
+        imglist.append(img)
+        imgdict = eval(ocrimages[ocrimages['image_name']==img]['tag_vector'].iloc[0])
+        # print(imgdict)
+        imgvect = list(imgdict.values())
+        # print(imgdict.keys())
+        dst = distance.euclidean(custvect, imgvect)
+        # imgdist['dist'] = dst
+        imgdistList.append(dst)
+    recom_img_index = imgdistList.index(min(imgdistList))
+    img_name = imglist[recom_img_index]
+    print(img_name, "index at ",recom_img_index, "eucld dist: ",min(imgdistList))
+    return JsonResponse(custDict,safe=False)
     
