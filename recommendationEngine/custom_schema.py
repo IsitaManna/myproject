@@ -63,3 +63,6 @@ create_customer_response_schema = AutoSchema(manual_fields=[
     coreapi.Field("questionID", required=True, location="form", type="integer"),
     coreapi.Field("responseID", required=True, location="form", type="integer")
 ])
+recommend_images_based_on_input = AutoSchema(manual_fields=[
+    coreapi.Field("CustID", required=True, location="form", type="string")
+])

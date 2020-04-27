@@ -1,5 +1,8 @@
 ### Global ###
-.env
+*.env
+*.jpg
+*.jpeg
+*.png
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
