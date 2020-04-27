@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class User(AbstractUser):
@@ -21,12 +22,6 @@ class Question(models.Model):
     image_path = models.FileField(upload_to='questions',null=True)
 
 
-class Rating(models.Model):
-    user = models.ForeignKey(User, related_name='user_rating', on_delete=models.CASCADE)
-    image_id = models.IntegerField(5)
-    rating = models.IntegerField(1)
-
-
 class Answer(models.Model):
     question = models.ForeignKey(Question, related_name='question_response', on_delete=models.CASCADE)
     answer = models.CharField(max_length=100)
@@ -45,3 +40,15 @@ class UserResponse(models.Model):
 class OCRImage(models.Model):
     image_path = models.FileField(upload_to='floor_plans',null=True)
     data_dict = models.TextField(null=True)
+
+
+class Rating(models.Model):
+    class Meta:
+        unique_together = ['user', 'image']
+
+    user = models.ForeignKey(User, related_name='user_rating', on_delete=models.CASCADE)
+    image = models.ForeignKey(OCRImage, related_name='user_image', on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(
+        default=1,
+        validators=[MinValueValidator(1),MaxValueValidator(5)]
+    )
