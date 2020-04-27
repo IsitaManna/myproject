@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 from .Views import customer_views
 from .Views import question_views
+from .Views import recommend_views
 
 
 
@@ -27,5 +28,9 @@ urlpatterns = [
     path('register-customer',customer_views.CustomerSignupView.as_view(),name='register_customer'),
     path('login-customer',customer_views.CustomerLoginView.as_view(),name = 'loginCustomer'),
     path('create-customer-response',customer_views.CustomerResponseView.as_view(),name='create_customer_response'),
-    path('recommend-images-based-on-input',views.recommendImagesBasedOnInput,name='recommendImagesBasedOnInput')
+    path('recommend-images-based-on-input',views.recommendImagesBasedOnInput,name='recommendImagesBasedOnInput'),
+    path('test',views.recommendImagesBasedOnInputTest,name='recommendImagesBasedOnInput'),
+    path('customer-response-recommendation',recommend_views.RecommendPlanView.as_view(),name='recommendplan')
+
+
 ]

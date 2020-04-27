@@ -18,7 +18,7 @@ class Question(models.Model):
     ]
     question = models.CharField(max_length=255, unique=True)
     question_type = models.CharField(max_length=30, choices=QUESTION_TYPES, default=QUANTITATIVE)
-    image_path = models.CharField(max_length=250,null=True)
+    image_path = models.FileField(upload_to='questions',null=True)
 
 
 class Rating(models.Model):
@@ -30,8 +30,7 @@ class Rating(models.Model):
 class Answer(models.Model):
     question = models.ForeignKey(Question, related_name='question_response', on_delete=models.CASCADE)
     answer = models.CharField(max_length=100)
-    image_path = models.CharField(max_length=250,null=True)
-
+    image_path = models.FileField(upload_to='answers',null=True)
 
 class UserResponse(models.Model):
     class Meta:
@@ -44,5 +43,5 @@ class UserResponse(models.Model):
 
 
 class OCRImage(models.Model):
-    image_path = models.CharField(max_length=250,null=True)
+    image_path = models.FileField(upload_to='floor_plans',null=True)
     data_dict = models.TextField(null=True)
