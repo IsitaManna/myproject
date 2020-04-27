@@ -1,4 +1,4 @@
-const apiBackendBaseUrl = "http://e9a8b8cc.ngrok.io/recommendation-engine";
+const apiBackendBaseUrl = "http://f12a4c33.ngrok.io/recommendation-engine";
 var num_of_questions=0;
 window.onload = function() {
     var name = this.localStorage.getItem("name");
@@ -34,6 +34,8 @@ window.onload = function() {
                 var radio="";
                 var i=0;
                 element.Answer.forEach(answer => {
+                    //---------checkings are kept for demo purpose as placeholders--------
+                    //---------to be removed later-----------------
                     i++;
                     if(element.Question.id == 6){
                         if(answer.id == element.User_Response.answer_id)
@@ -45,6 +47,39 @@ window.onload = function() {
 
 
                     }
+                    else if(element.Question.id == 17){
+                        //--------- checkings are kept for space issues in UI---------
+                       if(answer.id == 86 ){
+                        if(answer.id == element.User_Response.answer_id)
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        else
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        
+                       }
+                       else if (answer.id == 88){
+                        if(answer.id == element.User_Response.answer_id)
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        else
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                         
+                       }
+                       else{
+                        if(answer.id == element.User_Response.answer_id)
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        else
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                       }
+                       if ( i==3 ){
+                            radio+="<br><br>"
+                        }
+
+                    }
                     else{
                     if(answer.id == element.User_Response.answer_id)
                     radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
@@ -53,7 +88,8 @@ window.onload = function() {
 
                     }
                 });
-                
+                //-----------checkings to add demo images manually-------
+                //to be removed later
                 var imagediv=''
                 if(element.Question.id == 9){
                     imagediv='<img src="../images/questions/fire.jpeg" alt="Chicago" style="width:100%;height:100%">'
@@ -62,10 +98,7 @@ window.onload = function() {
                     var imagediv='<img src="../images/image1.jpg" alt="Chicago" style="width:100%;">'
 
                 }
-                else if(element.Question.id == 17){
-                    imagediv='<img src="../images/questions/house.jpg" alt="Chicago" style="width:100%;height:100%">'
-
-                }
+               
                 else if(element.Question.id == 23){
                     imagediv='<img src="../images/questions/roof.jpeg" alt="Chicago" style="width:100%;height:100%">'
 
@@ -78,7 +111,7 @@ window.onload = function() {
                     imagediv='<img src="../images/questions/sunroom.webp" alt="Chicago" style="width:100%;height:100%">'
 
                 }
-                if(element.Question.id == 6){
+                if(element.Question.id == 6 || element.Question.id == 17){
                     var finalHtml='<div class="card" >'+
                 '<div class="card-body" style="padding-bottom : 1px">'+
                     ' <div class="row">'+
@@ -87,10 +120,7 @@ window.onload = function() {
                 '</div>'+
                 '</div><br>'
                 }
-               
-                
                 else{
-
                 var finalHtml='<div class="card" >'+
                 '<div class="card-body" style="padding-bottom : 1px">'+
                     ' <div class="row">'+

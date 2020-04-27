@@ -1,5 +1,5 @@
 // const apiBackendBaseUrl = "http://192.168.1.13:8000/recommendation-engine";
-const apiBackendBaseUrl = "http://e9a8b8cc.ngrok.io/recommendation-engine";
+const apiBackendBaseUrl = "http://f12a4c33.ngrok.io/recommendation-engine";
 
 
 $(document).ready(function(){
