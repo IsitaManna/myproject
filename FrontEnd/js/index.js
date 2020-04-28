@@ -1,4 +1,4 @@
-const apiBackendBaseUrl = "http://f12a4c33.ngrok.io/recommendation-engine";
+const apiBackendBaseUrl = "http://e22e0c4b.ngrok.io/recommendation-engine";
 var num_of_questions=0;
 window.onload = function() {
     var name = this.localStorage.getItem("name");
@@ -20,6 +20,7 @@ window.onload = function() {
           },
       "data": JSON.stringify(data),
     };
+    console.log(settings);
     $.ajax(settings).done(function (response) {
         console.log("response from Api ------",response,response.length) ;
         num_of_questions=response.length;
@@ -229,7 +230,8 @@ function displayTabContent(tabName)
         $("#homeTab").append(spanTabText);
     }
     if(tabName == "planTab"){
-        $("#planTab").append(spanTabText);
+        window.location.href = "plan.html";
+        // $("#planTab").append(spanTabText);
     }
 }
 

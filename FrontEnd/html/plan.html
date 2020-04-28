@@ -14,6 +14,13 @@
   
         <link rel="stylesheet" href="../css/plan.css">
         <script src="../js/plan.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/var/www/html/Laiout/FrontEnd/jquery-bar-rating-master/dist/themes/fontawesome-stars.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="/var/www/html/Laiout/FrontEnd/jquery-bar-rating-master/dist/jquery.barrating.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark static-top top-header">
@@ -41,17 +48,17 @@
                             
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="container">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                              <!-- Indicators -->
+                             
                               <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                                 <li data-target="#myCarousel" data-slide-to="1"></li>
                                 <li data-target="#myCarousel" data-slide-to="2"></li>
                               </ol>
                           
-                              <!-- Wrapper for slides -->
+                             
                               <div class="carousel-inner ">
                                 <div class="item active ">
                                   <div class="row">
@@ -145,7 +152,7 @@
                                 
                               </div>
                              
-                              <!-- Left and right controls -->
+                    
                               <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                                 <span class="sr-only">Previous</span>
@@ -160,7 +167,16 @@
                             </div>
                           </div>
                           
+                    </div> -->
+                    <div class = "container" id = "planimg">
+                       
+                </div>
+                <div class="text-center" style="margin-top: 2%;">
+                    <button type="button" onclick="submitRating()" class="btn btn-success">Submit</button>
                     </div>
+               
+                    
+                    
                    
                 </div>
             </div>
