@@ -1,11 +1,14 @@
 const apiBackendBaseUrl = "http://e22e0c4b.ngrok.io/recommendation-engine";
+const imageBaseUrl = "http://e22e0c4b.ngrok.io/media/";
 var num_of_questions=0;
 window.onload = function() {
     var name = this.localStorage.getItem("name");
-
+    if(name == null){
+        name = "";
+    }
     $(document).ready(function(){
-          $("#username").html("Hi "+name);
-      });
+        $("#username").html("Hi "+name);
+    });
     // var url = apiBackendBaseUrl + "/fetch-question-responses";
     var url = apiBackendBaseUrl + "/question-response";
 
@@ -20,13 +23,10 @@ window.onload = function() {
           },
       "data": JSON.stringify(data),
     };
-    console.log(settings);
     $.ajax(settings).done(function (response) {
         console.log("response from Api ------",response,response.length) ;
         num_of_questions=response.length;
         response.forEach(element => {
-           
-
             console.log(element.Question.question_type);
             // document.getElementById("question").innerHTML = element.Question.question;
             // $('#question').attr('id',element.Question.id).append(element.Question.question);
@@ -40,11 +40,11 @@ window.onload = function() {
                     i++;
                     if(element.Question.id == 6){
                         if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" alt="Chicago" style="width:43%; height : 83%"> &nbsp;'
+                        radio+='<input type="radio" checked="checked" name="radio'+ element.Question.id +'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
                         else
                         radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" alt="Chicago" style="width:43%; height : 83%"> &nbsp;'
+                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
 
 
                     }
@@ -53,28 +53,28 @@ window.onload = function() {
                        if(answer.id == 86 ){
                         if(answer.id == element.User_Response.answer_id)
                         radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
                         radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         
                        }
                        else if (answer.id == 88){
                         if(answer.id == element.User_Response.answer_id)
                         radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
                         radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                          
                        }
                        else{
                         if(answer.id == element.User_Response.answer_id)
                         radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
                         radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" alt="Chicago" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                        }
                        if ( i==3 ){
                             radio+="<br><br>"
@@ -86,31 +86,30 @@ window.onload = function() {
                     radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
                     else 
                     radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
-
                     }
                 });
-                //-----------checkings to add demo images manually-------
-                //to be removed later
                 var imagediv=''
                 if(element.Question.id == 9){
-                    imagediv='<img src="../images/questions/fire.jpeg" alt="Chicago" style="width:100%;height:100%">'
+                    var imgUrl = imageBaseUrl + element.Question.image_path;
+                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
+                    // imagediv='<img src="../images/questions/fire.jpeg" style="width:100%;height:100%">'
                 }
                 else if (element.Question.id == 1){
-                    var imagediv='<img src="../images/image1.jpg" alt="Chicago" style="width:100%;">'
-
+                    var imgUrl = imageBaseUrl + element.Question.image_path;
+                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 }
                
                 else if(element.Question.id == 23){
-                    imagediv='<img src="../images/questions/roof.jpeg" alt="Chicago" style="width:100%;height:100%">'
-
+                    var imgUrl = imageBaseUrl + element.Question.image_path;
+                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 }
                 else if(element.Question.id == 11){
-                    imagediv='<img src="../images/questions/office.jpg" alt="Chicago" style="width:100%;height:100%">'
-
+                    var imgUrl = imageBaseUrl + element.Question.image_path;
+                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 }
                 else if(element.Question.id == 14){
-                    imagediv='<img src="../images/questions/sunroom.webp" alt="Chicago" style="width:100%;height:100%">'
-
+                    var imgUrl = imageBaseUrl + element.Question.image_path;
+                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 }
                 if(element.Question.id == 6 || element.Question.id == 17){
                     var finalHtml='<div class="card" >'+
@@ -150,10 +149,6 @@ window.onload = function() {
             else {
             $('#qualitative').append(finalHtml);
             }
-            // $('#question').append('<img src="../images/image1.jpg" alt="Chicago" style="width:100%;">');
-            // $('#question').append(radio+"<br></div></div>");
-
-
         });
       });
   };

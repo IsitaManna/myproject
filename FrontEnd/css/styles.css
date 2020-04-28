@@ -12,6 +12,11 @@
     background-color: #ceff9a;
     padding: 2px 0px;
 }
+.defaultBtn{
+    background-color: #BADA55;
+    color: #000000;
+    border: #BADA55;
+}
 a {
     color: #6D7377;
     font-weight: bold;
