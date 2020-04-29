@@ -57,4 +57,7 @@ class RecommendationRatingView(APIView):
             )
         
         user_rating = Rating.objects.filter(user=request.user.id).values()
-        return Response(data={"rating":user_rating}, status=200)
+        return Response(
+            data={"rating":user_rating, "status":201},
+            status=201
+        )

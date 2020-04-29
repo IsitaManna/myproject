@@ -13,10 +13,13 @@ class User(AbstractUser):
 class Question(models.Model):
     QUALITATIVE = 'Qualitative'
     QUANTITATIVE = 'Quantitative'
+    STYLE = "Style"
     QUESTION_TYPES = [
         (QUALITATIVE, 'Qualitative'),
-        (QUANTITATIVE, 'Quantitative')
+        (QUANTITATIVE, 'Quantitative'),
+        (STYLE, 'Style')
     ]
+
     question = models.CharField(max_length=255, unique=True)
     question_type = models.CharField(max_length=30, choices=QUESTION_TYPES, default=QUANTITATIVE)
     image_path = models.FileField(upload_to='questions',null=True)
@@ -52,3 +55,15 @@ class Rating(models.Model):
         default=1,
         validators=[MinValueValidator(1),MaxValueValidator(5)]
     )
+
+
+class StyleImage(models.Model):
+    image_path = models.FileField(upload_to='style_plans',null=True)
+    parent_id = models.ForeignKey("self", null=True, on_delete=models.CASCADE, default=None)
+    bedroom = models.PositiveIntegerField(default=1)
+    is_black = models.BooleanField(default=True)
+
+
+class UserStyle(models.Model):
+    user = models.ForeignKey(User, related_name='user_userstyle', on_delete=models.CASCADE)
+    style = models.ForeignKey(StyleImage, related_name='user_style', on_delete=models.CASCADE)
