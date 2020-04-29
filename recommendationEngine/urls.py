@@ -4,8 +4,7 @@ from . import views
 from .Views import customer_views
 from .Views import question_views
 from .Views import recommend_views
-
-
+from .Views import result_conversion_view
 
 urlpatterns = [
     path('question-response',question_views.QuestionResponseView.as_view(),name='question_response'),
@@ -30,7 +29,8 @@ urlpatterns = [
     path('login-customer',customer_views.CustomerLoginView.as_view(),name = 'loginCustomer'),
     path('create-customer-response',customer_views.CustomerResponseView.as_view(),name='create_customer_response'),
     path('customer-response-recommendation',recommend_views.RecommendPlanView.as_view(),name='recommendplan'),
-    path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating')
+    path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating'),
+    path('result-conversion',result_conversion_view.ResultConversionView.as_view(),name='result_conversion')
 
 
 ]

@@ -67,3 +67,7 @@ class StyleImage(models.Model):
 class UserStyle(models.Model):
     user = models.ForeignKey(User, related_name='user_userstyle', on_delete=models.CASCADE)
     style = models.ForeignKey(StyleImage, related_name='user_style', on_delete=models.CASCADE)
+
+class ColoredTextTestImage(models.Model):
+    image_path = models.ImageField(upload_to='colored_text_test_plans',null=True)
+    data_dict = models.TextField(null=True)
