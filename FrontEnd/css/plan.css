@@ -2,6 +2,9 @@
 .top-header{
     background-color: #e2fac3;
 }
+.navbar { 
+  padding: 2px 2px;
+}
 .tab-body{
     margin-top: 1%;
 }
@@ -55,3 +58,8 @@ a:hover{
     content: '\2605';
   }
 
+  footer{
+    border-top: 1px solid;
+    margin-top: 2%;
+    background-color: #e2fac3;
+  }

@@ -1,7 +1,10 @@
-const apiBackendBaseUrl = "http://e22e0c4b.ngrok.io/recommendation-engine";
-const imageBaseUrl = "http://e22e0c4b.ngrok.io/media/";
+const apiBackendBaseUrl = "http://cf4e9916.ngrok.io/recommendation-engine";
+const imageBaseUrl = "http://cf4e9916.ngrok.io/media/";
 var num_of_questions=0;
 window.onload = function() {
+    
+    addScrollEvent();
+    createStyleTab();
     var name = this.localStorage.getItem("name");
     if(name == null){
         name = "";
@@ -26,7 +29,9 @@ window.onload = function() {
     $.ajax(settings).done(function (response) {
         console.log("response from Api ------",response,response.length) ;
         num_of_questions=response.length;
+        var i=0;
         response.forEach(element => {
+            i++;
             console.log(element.Question.question_type);
             // document.getElementById("question").innerHTML = element.Question.question;
             // $('#question').attr('id',element.Question.id).append(element.Question.question);
@@ -113,7 +118,7 @@ window.onload = function() {
                 }
                 if(element.Question.id == 6 || element.Question.id == 17){
                     var finalHtml='<div class="card" >'+
-                '<div class="card-body" style="padding-bottom : 1px">'+
+                '<div id="divid'+i+'" href="divid'+(i+1)+'" class="card-body" style="padding-bottom : 1px">'+
                     ' <div class="row">'+
                         '<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> '+htmldivs+''+radio+'</div>'+
                     '</div>'+
@@ -122,7 +127,7 @@ window.onload = function() {
                 }
                 else{
                 var finalHtml='<div class="card" >'+
-                '<div class="card-body" style="padding-bottom : 1px">'+
+                '<div id="divid'+i+'" href="divid'+(i+1)+'" class="card-body" style="padding-bottom : 1px">'+
                     ' <div class="row">'+
                         '<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12"> '+htmldivs+''+radio+'</div>'+
                         '<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">'+imagediv+'</div>'+
@@ -199,9 +204,15 @@ function submitResponse(){
             // createJwtToken(1200,email);
             swal({
               title: "Success",
-              text: response["message"],
+              text: response["message"]+"!",
               icon: "success",
-            });
+            }).then( function(){
+                $('#lifestyle').removeClass('active');
+                $('#Qualitativetab').removeClass('active');
+                $('#style').addClass('active show');
+                $('#Styletab').addClass('active');
+                $(this).scrollTop(0);
+          });
         }
         else{
             swal({
@@ -250,3 +261,169 @@ function nextTab(){
 
     
 }
+function addScrollEvent(){
+    $('a[href^="#"]').on('click', function(event) {
+
+        var target = $(this.getAttribute('href'));
+    
+        if( target.length ) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top
+            }, 1000);
+        }
+    
+    });
+}
+function createStyleTab(){
+    var url = apiBackendBaseUrl + "/plan-style";
+
+    var data={};
+    var token = this.localStorage.getItem("token");
+    var settings = {
+      "url": url,
+      "method": "GET",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization" : token
+          },
+      "data": JSON.stringify(data),
+    };
+
+    $.ajax(settings).done(function (response) {
+
+        console.log("response for style tab ------",response,response.length) ;
+        var row = ' <div class="row" style="margin-bottom: 2%;"> ';
+        var count=0;
+        response.forEach(element => {
+            count++;
+            if(count>3){
+                count=0;
+                newrow=' <div class="row" style="margin-bottom: 2%;"> ';
+                row=row+'</div>'+newrow;
+                
+            }
+            var eachcolumn='<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" id="img'+element.id+'" onclick="getlevel2Images('+element.id+')">'+
+            '<a href="#level2">'+
+                '<img id="l1Image-'+element.id+'" src="'+imageBaseUrl+element.image_path+'" style="width: 100%; float : right;">'+
+            ' </a>'+
+            '</div>'
+            row=row+eachcolumn;
+        });
+        var finalhtml=row+"</div>";
+        $('#styleLevel1').append(finalhtml);
+
+    });
+    
+
+}
+
+function getlevel2Images(imageId){
+    $("#planButton").attr('disabled','disabled');
+    $('.selectedImg').removeClass('selectedImg');
+    $("#l1Image-"+imageId).addClass('selectedImg');
+    $('#styleLevel2').empty();
+    var firstRow='<div class ="row"  style="margin-bottom: 2%;">'+
+                    '<div id= "level2" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">' +
+                        '<b> Level 2 : Select the Bedroom Position for the Selected Floor Plan</b>'+
+                    '</div>'+
+                    '<div id= "level2" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">' +
+                        '<a href="#level1" style="float: right; font-size: 14px;" >'+
+                            '<i class="fa fa-angle-double-up" aria-hidden="true"></i> Go back to Level 1</a>'+
+                    '</div>'+
+                '</div>'
+    $('#styleLevel2').append(firstRow);
+
+    var url = apiBackendBaseUrl + "/plan-style";
+
+    var data={id:imageId};
+    var token = this.localStorage.getItem("token");
+    var settings = {
+      "url": url,
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization" : token
+          },
+      "data": JSON.stringify(data),
+    };
+    $.ajax(settings).done(function (response) {
+        console.log("response is------",response);
+        var row = ' <div class="row" style="margin-bottom: 2%;"> ';
+        var count=0;
+        response.forEach(element => {
+            count++;
+            if(count>3){
+                count=0;
+                newrow=' <div class="row" style="margin-bottom: 2%;"> ';
+                row=row+'</div>'+newrow;
+                
+            }
+            var eachcolumn='<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" alt="" id="img'+element.id+'">'+
+            '<a href="#planButton">'+
+                '<img id="image-'+element.id+'" src="'+imageBaseUrl+element.image_path+'" style="height: 300px;width: 300px; float : right;" onclick="selectImage('+element.id+')">'+
+            '</a>'+
+
+            '</div>'
+            row=row+eachcolumn;
+        });
+        var finalhtml=row+"</div>";
+        $('#styleLevel2').append(finalhtml);
+        // $('img').click(function(){
+        //     console.log("selected---",this);
+        //     $('.selected').removeClass('selected');
+        //     $(this).addClass('selected');
+        // });
+    });
+
+}
+function selectImage(id){
+    console.log("selected---");
+    
+    $('.selected').removeClass('selected');
+    $("#image-"+id).addClass('selected');
+    $("#planButton").removeAttr('disabled');
+}
+
+function submitStyleChoice(){
+    var element=$('.selected').attr("id");
+    var id=element.split("-")[1];
+    console.log("Submitted!!!",id);
+    var url = apiBackendBaseUrl + "/bedroom-style";
+
+    var data={id:id};
+    var token = this.localStorage.getItem("token");
+    var settings = {
+      "url": url,
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization" : token
+          },
+      "data": JSON.stringify(data),
+    };
+    $.ajax(settings).done(function (response) {
+        console.log("response in submission---",response);
+        if(response["status"] == 201){
+    
+            // createJwtToken(1200,email);
+            swal({
+                title: "Success",
+                text: response["message"],
+                icon: "success"
+              }).then( function(){
+                    window.location.href = "plan.html";
+              });
+        }
+        else{
+            swal({
+              title: "Error",
+              text: response["message"],
+              icon: "error",
+            });
+          }
+    });
+    
+
+}
+

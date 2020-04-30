@@ -1,5 +1,6 @@
-const apiBackendBaseUrl = "http://e22e0c4b.ngrok.io/recommendation-engine";
-const host = "http://e22e0c4b.ngrok.io/"
+const apiBackendBaseUrl = "http://cf4e9916.ngrok.io/recommendation-engine";
+const imageBaseUrl = "http://cf4e9916.ngrok.io/media/";
+
 let imgid =[];
 
 // $(document).ready(function(){
@@ -54,7 +55,7 @@ window.onload = function() {
                 '<div class="card-body" style="padding-bottom : 1px">'+
                     '<div class ="row">'+
                         '<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'+
-                            '<img src='+host+'media/'+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
+                            '<img src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</div>'+
                     '</div>'+
                     '<div class="row">'+
@@ -155,6 +156,25 @@ window.onload = function() {
     
    
   }
+
+  function logout(){
+    localStorage.clear();
+    window.location.href = "login-registration.html";
+
+}
+function displayTabContent(tabName)
+{
+    console.log("-------Tab Name-------",tabName);
+    var spanTabText = '<span class="sr-only">(current)</span>';
+    if(tabName == "homeTab"){
+        window.location.href = "index.html";
+        // $("#homeTab").append(spanTabText);
+    }
+    if(tabName == "planTab"){
+        // window.location.href = "plan.html";
+        $("#planTab").append(spanTabText);
+    }
+}
 
 
 
