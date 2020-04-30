@@ -5,6 +5,7 @@ from .Views import customer_views
 from .Views import question_views
 from .Views import recommend_views
 from .Views import result_conversion_view
+from .Views import style_view
 
 urlpatterns = [
     path('question-response',question_views.QuestionResponseView.as_view(),name='question_response'),
@@ -30,7 +31,9 @@ urlpatterns = [
     path('create-customer-response',customer_views.CustomerResponseView.as_view(),name='create_customer_response'),
     path('customer-response-recommendation',recommend_views.RecommendPlanView.as_view(),name='recommendplan'),
     path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating'),
-    path('result-conversion',result_conversion_view.ResultConversionView.as_view(),name='result_conversion')
+    path('plan-style',style_view.OuterShapeStyleView.as_view(),name='styleimg'),
+    path('bedroom-style',style_view.BedroomStyleView.as_view(),name='bedroomstyle'),
+    path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating')
 
 
 ]

@@ -7,7 +7,7 @@ import base64
 import pandas as pd
 import glob
 from django.core.files import File
-from djang.conf import settings
+from django.conf import settings
 from recommendationEngine.models import OCRImage
 
 

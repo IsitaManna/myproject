@@ -59,8 +59,8 @@ class Rating(models.Model):
 
 class StyleImage(models.Model):
     image_path = models.FileField(upload_to='style_plans',null=True)
-    parent_id = models.ForeignKey("self", null=True, on_delete=models.CASCADE, default=None)
-    bedroom = models.PositiveIntegerField(default=1)
+    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE, default=None)
+    bedroom = models.PositiveIntegerField(null=True)
     is_black = models.BooleanField(default=True)
 
 
