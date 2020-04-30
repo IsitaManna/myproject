@@ -34,7 +34,16 @@ class OuterShapeStyleView(APIView):
         return Response(data=response_li, status=200)
 
     def post(self, request):
-        children = StyleImage.objects.filter(parent_id=request.data['id'])
+        user_response = UserResponse.objects.get(user=request.user, question_id=4)
+        if user_response.answer.answer == '1':
+            children = StyleImage.objects.filter(bedroom=1, parent_id=request.data['id'])
+
+        elif user_response.answer.answer == '2':
+            children = StyleImage.objects.filter(bedroom=2, parent_id=request.data['id'])
+
+        else:
+            children = StyleImage.objects.filter(parent_id=request.data['id'])
+
         response_li = []
         for child in children:
             di = {
