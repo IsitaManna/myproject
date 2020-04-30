@@ -19,6 +19,12 @@ class OuterShapeStyleView(APIView):
         elif user_response.answer.answer == '2':
             child_li = StyleImage.objects.filter(bedroom=2).values_list('parent_id', flat=True)
             parents = StyleImage.objects.filter(id__in=child_li)
+        elif user_response.answer.answer == '3':
+            child_li = StyleImage.objects.filter(bedroom=3).values_list('parent_id', flat=True)
+            parents = StyleImage.objects.filter(id__in=child_li)
+        elif user_response.answer.answer == '4':
+            child_li = StyleImage.objects.filter(bedroom=4).values_list('parent_id', flat=True)
+            parents = StyleImage.objects.filter(id__in=child_li)
         else:
             child_li = StyleImage.objects.filter(parent__isnull=False).values_list('parent_id', flat=True)
             parents = StyleImage.objects.filter(id__in=child_li)
@@ -40,7 +46,10 @@ class OuterShapeStyleView(APIView):
 
         elif user_response.answer.answer == '2':
             children = StyleImage.objects.filter(bedroom=2, parent_id=request.data['id'])
-
+        elif user_response.answer.answer == '3':
+            children = StyleImage.objects.filter(bedroom=3, parent_id=request.data['id'])
+        elif user_response.answer.answer == '4':
+            children = StyleImage.objects.filter(bedroom=4, parent_id=request.data['id'])
         else:
             children = StyleImage.objects.filter(parent_id=request.data['id'])
 
