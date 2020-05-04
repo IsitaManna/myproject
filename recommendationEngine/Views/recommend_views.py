@@ -7,7 +7,12 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
 from recommendationEngine.models import User, UserResponse, Rating
-from recommendationEngine.Utils.vectorize import get_customer_reponse_vect, get_vector_distance
+from recommendationEngine.Utils.vectorize import (
+    get_customer_reponse_vect,
+    get_vector_distance,
+    find_similar_plan,
+    find_similar_user
+)
 
 
 class RecommendPlanView(APIView):
@@ -60,4 +65,17 @@ class RecommendationRatingView(APIView):
         return Response(
             data={"rating":user_rating, "status":201},
             status=201
+        )
+
+
+class CollabFilteringRecommendView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        sim_list = find_similar_user(request.user)
+        find_similar_plan(sim_list)
+        return Response(
+            data={"message":"No ratings present."},
+            status=200
         )

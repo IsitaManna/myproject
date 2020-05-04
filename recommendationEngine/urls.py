@@ -31,6 +31,7 @@ urlpatterns = [
     path('create-customer-response',customer_views.CustomerResponseView.as_view(),name='create_customer_response'),
     path('customer-response-recommendation',recommend_views.RecommendPlanView.as_view(),name='recommendplan'),
     path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating'),
+    path('similar-plan',recommend_views.CollabFilteringRecommendView.as_view(),name='collabfiltering'),
     path('plan-style',style_view.OuterShapeStyleView.as_view(),name='styleimg'),
     path('bedroom-style',style_view.BedroomStyleView.as_view(),name='bedroomstyle'),
     path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating')

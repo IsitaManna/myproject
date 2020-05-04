@@ -1,6 +1,8 @@
 import json
 from scipy.spatial import distance
-from recommendationEngine.models import Answer, OCRImage
+from recommendationEngine.models import Answer, OCRImage, User, Rating
+import numpy as np
+from django.db.models import Avg
 
 
 FLOOR_TAGS = ["balcony/ porch","bath","bedroom","bonus","closet","deck/outdoor space","den","dining room",
@@ -79,3 +81,32 @@ def get_vector_distance(customer_vect):
             }
         )
     return dist_li
+
+
+def find_similar_user(current_user):
+    simi_list = []
+    curr_user_vect = json.loads(current_user.vector)['Vector']
+    curr_np_arr = np.array(curr_user_vect)
+    for user in User.objects.filter(vector__isnull=False).values('id','vector'):
+        vect = json.loads(user['vector'])['Vector']
+        np_arr = np.array(vect)
+        euclid_dist = np.linalg.norm(curr_np_arr - np_arr)
+        simi_list.append(
+            {
+                "user_id": user['id'],
+                "euclid_dist": euclid_dist   
+            }
+        )
+    simi_list.sort(key=lambda x : x["euclid_dist"], reverse=False)
+    print("Similarity- ", simi_list[1:])  # ignoring 0.0 distance
+    return simi_list
+
+
+def find_similar_plan(simi_list):
+    user_ids = [i["user_id"] for i in simi_list]
+    rating = Rating.objects.filter(
+        user_id__in=user_ids
+    ).values('image__image_path').annotate(Avg('rating'))
+    rating = list(rating)
+    print(rating)
+    return rating
