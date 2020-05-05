@@ -74,8 +74,16 @@ class CollabFilteringRecommendView(APIView):
 
     def get(self, request):
         sim_list = find_similar_user(request.user)
-        find_similar_plan(sim_list)
+        reco = find_similar_plan(sim_list)
+        reco = [
+            {
+                "img":r["image__image_path"],
+                "dist": r["rating__avg"],
+                "id": r["image_id"]
+            } for r in reco
+        ]
+        
         return Response(
-            data={"message":"No ratings present."},
+            data={"recommendation": reco},
             status=200
         )

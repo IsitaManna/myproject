@@ -97,8 +97,9 @@ def find_similar_user(current_user):
                 "euclid_dist": euclid_dist   
             }
         )
+    simi_list = simi_list[1:]  # ignoring same user
     simi_list.sort(key=lambda x : x["euclid_dist"], reverse=False)
-    print("Similarity- ", simi_list[1:])  # ignoring 0.0 distance
+
     return simi_list
 
 
@@ -106,7 +107,7 @@ def find_similar_plan(simi_list):
     user_ids = [i["user_id"] for i in simi_list]
     rating = Rating.objects.filter(
         user_id__in=user_ids
-    ).values('image__image_path').annotate(Avg('rating'))
+    ).values('image__image_path', 'image_id').annotate(Avg('rating'))
     rating = list(rating)
-    print(rating)
-    return rating
+    rating.sort(key=lambda x : x['rating__avg'], reverse=False)
+    return rating[:4]  # return top n images
