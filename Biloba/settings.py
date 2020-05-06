@@ -146,6 +146,62 @@ STATIC_URL = '/static/'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Logging configs
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {},
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': f'{BASE_DIR}/dev_logs/django-laiout.log',
+            'backupCount': 7,
+            'when': 'M',
+            'interval': 1,
+            'utc': False,
+            'encoding': None,
+            'formatter': 'simple'
+
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console','file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.security.*': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    }
+}
+
+
+
 OCR_IMAGE_DIR = '/home/tebackup/Workspace/Laiout/floor_plans/' # absolute path
 
 GAN_TEST_IMAGE_DIR = "/home/sancharig/Documents/Biloba/GAN Model/laiout_v3/test_latest/images/" # absolute path
