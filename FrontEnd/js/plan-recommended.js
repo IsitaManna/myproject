@@ -2,7 +2,6 @@ const apiBackendBaseUrl = "http://65b09446.ngrok.io/recommendation-engine";
 const imageBaseUrl = "http://65b09446.ngrok.io/media/";
 
 let imgid =[];
-
 // $(document).ready(function(){
 
 // $('#rating6 span').click(function(){
@@ -22,7 +21,7 @@ window.onload = function() {
           $("#username").html("Hi "+name);
       });
     // var url = apiBackendBaseUrl + "/fetch-question-responses";
-    var url = apiBackendBaseUrl + "/customer-response-recommendation";
+    var url = apiBackendBaseUrl + "/similar-plan";
 
     var data={};
     var token = this.localStorage.getItem("token");
@@ -54,9 +53,9 @@ window.onload = function() {
             '<div class="card" >'+
                 '<div class="card-body" style="padding-bottom : 1px">'+
                     '<div class ="row">'+
-                        '<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="download-area">'+
+                        '<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'+
                         '<a href='+imageBaseUrl+element.img+' target="_blank" >'+
-                        '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
+                            '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</a>'+
                         '</div>'+
                     '</div>'+
@@ -71,8 +70,8 @@ window.onload = function() {
                      '</select>'+
                         '</div>'+
                         '<div class ="col-xs-4">'+
-                          '<a >'+
-                          '<i onclick=forceDownload("'+imageBaseUrl+element.img+'","'+element.img+'") title="Download Image" class="fa fa-download" aria-hidden="true" style="font-size: 23px;float: right;color: blue;"></i>'+
+                          '<a>'+
+                          '<i title="Download Image" onclick=forceDownload("'+imageBaseUrl+element.img+'","'+element.img+'") class="fa fa-download" aria-hidden="true" style="font-size: 23px;float: right;color: blue;"></i>'+
                           '</a>'+
                         '</div>'+
                     '</div>'+
@@ -147,7 +146,10 @@ window.onload = function() {
                   title: "Success",
                   text: response["message"],
                   icon: "success",
-                });
+                }).then( function(){
+                  window.location.href = "stylePage.html";
+                 
+            });
             }
             else{
                 swal({
@@ -183,14 +185,28 @@ function displayTabContent(tabName)
     }
 }
 
-function downloadPNGImage(linkElement) {
-  var myDiv = document.getElementById('download-area');
-  var myImage = myDiv.children[0];
-  let downloadLink = myImage.src + "&format=jpg";
-  linkElement.setAttribute('download', downloadLink);
-  linkElement.href = downloadLink;
-  linkElement.click();
+function downloadFile(data, fileName, type="octet/stream") {
+  // Create an invisible A element
+  const a = document.createElement("a");
+  a.style.display = "none";
+  document.body.appendChild(a);
+
+  // Set the HREF to a Blob representation of the data to be downloaded
+  a.href = window.URL.createObjectURL(
+    new Blob([data], { type })
+  );
+
+  // Use download attribute to set set desired file name
+  a.setAttribute("download", fileName);
+
+  // Trigger the download by simulating click
+  a.click();
+
+  // Cleanup
+  window.URL.revokeObjectURL(a.href);
+  document.body.removeChild(a);
 }
+
 function forceDownload(url,fileName){
   // var url="http://fc545a71.ngrok.io/media/floor_plans/199.jpg";
   console.log("url is",url);
@@ -211,6 +227,9 @@ function forceDownload(url,fileName){
   }
   xhr.send();
 }
+
+
+
 
 
 

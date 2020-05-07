@@ -1,10 +1,11 @@
-const apiBackendBaseUrl = "http://cf4e9916.ngrok.io/recommendation-engine";
-const imageBaseUrl = "http://cf4e9916.ngrok.io/media/";
+const apiBackendBaseUrl = "http://65b09446.ngrok.io/recommendation-engine";
+const imageBaseUrl = "http://65b09446.ngrok.io/media/";
 var num_of_questions=0;
 window.onload = function() {
-    
     addScrollEvent();
-    createStyleTab();
+    // createStyleTab()
+
+    // ------- Qualitative and Quantitative Tabs---------------
     var name = this.localStorage.getItem("name");
     if(name == null){
         name = "";
@@ -12,7 +13,6 @@ window.onload = function() {
     $(document).ready(function(){
         $("#username").html("Hi "+name);
     });
-    // var url = apiBackendBaseUrl + "/fetch-question-responses";
     var url = apiBackendBaseUrl + "/question-response";
 
     var data={};
@@ -27,15 +27,13 @@ window.onload = function() {
       "data": JSON.stringify(data),
     };
     $.ajax(settings).done(function (response) {
-        console.log("response from Api ------",response,response.length) ;
+        // console.log("response from Api ------",response,response.length) ;
         num_of_questions=response.length;
         var i=0;
         response.forEach(element => {
             i++;
             console.log(element.Question.question_type);
-            // document.getElementById("question").innerHTML = element.Question.question;
-            // $('#question').attr('id',element.Question.id).append(element.Question.question);
-            // var div="<div class='card'><div class='card-body'>";
+           
                 var htmldivs='<label id="question-'+element.Question.id+'"><b>'+element.Question.question+'</b></label><br>'
                 var radio="";
                 var i=0;
@@ -158,7 +156,7 @@ window.onload = function() {
       });
   };
 
-
+// -------Submitting response of qualitative and quantitative questionarre---------
 function submitResponse(){
     var token = this.localStorage.getItem("token");
 
@@ -182,6 +180,7 @@ function submitResponse(){
         }
 
     }
+    
     if(allResponseFilled){
     var url = apiBackendBaseUrl + "/create-customer-response";
     var responsedata={
@@ -207,11 +206,14 @@ function submitResponse(){
               text: response["message"]+"!",
               icon: "success",
             }).then( function(){
-                $('#lifestyle').removeClass('active');
-                $('#Qualitativetab').removeClass('active');
-                $('#style').addClass('active show');
-                $('#Styletab').addClass('active');
-                $(this).scrollTop(0);
+                window.location.href = "plan-recommended.html";
+
+                // createStyleTab();
+                // $('#lifestyle').removeClass('active');
+                // $('#Qualitativetab').removeClass('active');
+                // $('#style').addClass('active show');
+                // $('#Styletab').addClass('active');
+                // $(this).scrollTop(0);
           });
         }
         else{
@@ -276,6 +278,18 @@ function addScrollEvent(){
     });
 }
 function createStyleTab(){
+    $('#styleLevel1').empty();
+    $('#styleLevel2').empty();
+
+
+
+    var firstRow = '<div class ="row" style="margin-bottom: 2%;">'+
+    '<div id="level1" class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'+
+    '<b> Level 1 : Click on the Images to Select the Floor Plan Outer Structure</b>'+
+    '</div>'+
+    '</div>'
+    $('#styleLevel1').append(firstRow);
+
     var url = apiBackendBaseUrl + "/plan-style";
 
     var data={};
@@ -324,10 +338,10 @@ function getlevel2Images(imageId){
     $("#l1Image-"+imageId).addClass('selectedImg');
     $('#styleLevel2').empty();
     var firstRow='<div class ="row"  style="margin-bottom: 2%;">'+
-                    '<div id= "level2" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">' +
-                        '<b> Level 2 : Select the Bedroom Position for the Selected Floor Plan</b>'+
+                    '<div id= "level2" class="col-md-8 col-lg-8 col-sm-8 col-xs-8">' +
+                        '<b> Level 2 : Click on the Images to Select the Bedroom Position for the Selected Floor Plan</b>'+
                     '</div>'+
-                    '<div id= "level2" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">' +
+                    '<div id= "level2" class="col-md-4 col-lg-4 col-sm-12 col-xs-12">' +
                         '<a href="#level1" style="float: right; font-size: 14px;" >'+
                             '<i class="fa fa-angle-double-up" aria-hidden="true"></i> Go back to Level 1</a>'+
                     '</div>'+
