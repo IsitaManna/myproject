@@ -26,7 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!@1!8*!=42okri%&j_&^0cor1)%!6z18u1i%l%e+$%)$nnbpoa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('MODE') == 'Prod':
+    DEBUG = False
+else:
+    DEBUG = True
 
 # ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13"]
 ALLOWED_HOSTS = "*"
@@ -148,6 +151,12 @@ MEDIA_URL = '/media/'
 
 # Logging configs
 
+if DEBUG:
+    LOG_PATH = f'{BASE_DIR}/dev_logs/django-laiout.log'
+else:
+    LOG_PATH = f'{os.getenv("LOG_DIR")}/django-laiout.log'
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -161,19 +170,23 @@ LOGGING = {
             'style': '{',
         },
     },
-    'filters': {},
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
     'handlers': {
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
         'file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': f'{BASE_DIR}/dev_logs/django-laiout.log',
+            'filename': LOG_PATH,
             'backupCount': 7,
-            'when': 'M',
+            'when': 'D',
             'interval': 1,
             'utc': False,
             'encoding': None,
@@ -183,18 +196,18 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console','file'],
-            'level': 'DEBUG',
+            'handlers': ['console','file'] if DEBUG else ['file'],
+            'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file'] if DEBUG else ['file'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.security.*': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'handlers': ['console', 'file'] if DEBUG else ['file'],
+            'level': 'INFO',
             'propagate': True,
         }
     }
@@ -204,7 +217,7 @@ LOGGING = {
 
 OCR_IMAGE_DIR = '/home/tebackup/Workspace/Laiout/floor_plans/' # absolute path
 
-GAN_TEST_IMAGE_DIR = "/media/gan_test_img/" # absolute path
+GAN_PREDICT_IMAGE_DIR = "/media/gan_test_img/" # relative path
 
 PLAN_COLOR_DICT = [{'Floor tags': 'balcony/ porch', 'R': 77, 'G': 11, 'B': 65},
                 {'Floor tags': 'bath', 'R': 2, 'G': 190, 'B': 242},

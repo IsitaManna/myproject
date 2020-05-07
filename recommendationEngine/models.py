@@ -72,6 +72,7 @@ class ColoredTextTestImage(models.Model):
     image_path = models.ImageField(upload_to='colored_text_test_plans',null=True)
     data_dict = models.TextField(null=True)
 
-class GANTestImage(models.Model):
-    image_path = models.FileField(upload_to='gan_test_img',null=True)
+class GANPredictImage(models.Model):
+    style_image = models.ForeignKey(StyleImage, null=True, on_delete=models.CASCADE, default=None)
+    image_path = models.FileField(upload_to='gan_predict_img',null=True)
     parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE, default=None)
