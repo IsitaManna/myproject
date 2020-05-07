@@ -71,3 +71,7 @@ class UserStyle(models.Model):
 class ColoredTextTestImage(models.Model):
     image_path = models.ImageField(upload_to='colored_text_test_plans',null=True)
     data_dict = models.TextField(null=True)
+
+class GANTestImage(models.Model):
+    image_path = models.FileField(upload_to='gan_test_img',null=True)
+    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE, default=None)
