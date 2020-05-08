@@ -1,10 +1,13 @@
+import requests
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from django.forms.models import model_to_dict
+from django.conf import settings
+from django.core.files.base import ContentFile
 
-from recommendationEngine.models import UserResponse, StyleImage, UserStyle
+from recommendationEngine.models import UserResponse, StyleImage, UserStyle, OCRImage
 
 
 class OuterShapeStyleView(APIView):
@@ -75,6 +78,16 @@ class BedroomStyleView(APIView):
                     user=request.user,
                     defaults={'style_id': request.data['id']}
                 )
+            image_pth = UserStyle.objects.get(
+                user=request.user
+            ).style.image_path.path
+            files = {'file': open(image_pth, 'rb')} 
+            req = requests.post(settings.GAN_HOST+'/input',files=files)
+
+            get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'])
+
+            ocr_img = OCRImage(data_dict=None)
+            ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
         else:
             return Response(data={"message":"id has no parent","status":400}, status=400)
         
