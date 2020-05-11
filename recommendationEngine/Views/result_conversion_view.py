@@ -19,7 +19,7 @@ class ResultConversionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        rootdir = settings.GAN_TEST_IMAGE_DIR
+        rootdir = settings.GAN_PREDICT_IMAGE_DIR
         imgLists = glob.glob(rootdir+"*.png")
         for img in imgLists:
             imgname = img.split('.')[0].split('/')[-1]
