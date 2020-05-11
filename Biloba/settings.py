@@ -217,7 +217,7 @@ LOGGING = {
 
 OCR_IMAGE_DIR = '/home/tebackup/Workspace/Laiout/floor_plans/' # absolute path
 
-GAN_PREDICT_IMAGE_DIR = "/media/gan_test_img/" # relative path
+GAN_PREDICT_IMAGE_DIR = "/media/gan_predict_img/" # relative path
 
 PLAN_COLOR_DICT = [{'Floor tags': 'balcony/ porch', 'R': 77, 'G': 11, 'B': 65},
                 {'Floor tags': 'bath', 'R': 2, 'G': 190, 'B': 242},
