@@ -214,3 +214,8 @@ img { max-width: 100%; }
 .form-bottom form textarea {
     height: 80px !important;
 }
+footer{
+    border-top: 1px solid;
+    margin-top: 2%;
+    background-color: #e2fac3;
+  }
