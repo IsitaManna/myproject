@@ -66,7 +66,7 @@ def get_customer_reponse_vect(user_response):
 
 
 def get_vector_distance(customer_vect):
-    ocrimages = OCRImage.objects.all()
+    ocrimages = OCRImage.objects.filter(data_dict__isnull=False)
     dist_li = []
     for img in ocrimages:
         imgdict = json.loads(img.data_dict)

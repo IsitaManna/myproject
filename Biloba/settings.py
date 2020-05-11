@@ -213,7 +213,7 @@ LOGGING = {
     }
 }
 
-
+GAN_HOST = 'https://f83c7809.ngrok.io'
 
 OCR_IMAGE_DIR = '/home/tebackup/Workspace/Laiout/floor_plans/' # absolute path
 
