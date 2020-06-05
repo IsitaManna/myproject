@@ -1,0 +1,65 @@
+
+.top-header{
+    background-color: #e2fac3;
+}
+.navbar { 
+  padding: 2px 2px;
+}
+.tab-body{
+    margin-top: 1%;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    color: #000000;
+    background-color: #ceff9a;
+}
+a {
+    color: #6D7377;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: #BADA55;
+}
+.hovereffect:hover .overlay {
+    opacity: 1;
+  }
+
+
+/* .rating {
+    float: left;
+}
+.rating span {
+    font-size: 25px;
+    cursor: pointer;
+    float: right;
+}
+
+.rating span:hover, .rating span:hover ~ span{
+    color: red;
+} */
+.star{
+    color: goldenrod;
+    font-size: 2.0rem;
+    padding: 0 1rem; 
+  }
+  .star::before{
+    content: '\2606';
+    cursor: pointer;
+  }
+  .star:hover::before{
+   
+    content: '\2605';
+    color: #bada55;
+  }
+  .star.rated::before{
+    /* the :hover should come first */
+    content: '\2605';
+  }
+
+  footer{
+    border-top: 1px solid;
+    margin-top: 2%;
+    background-color: #e2fac3;
+  }

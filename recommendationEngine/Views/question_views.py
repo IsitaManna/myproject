@@ -17,6 +17,11 @@ class QuestionResponseView(APIView):
         
         for question in Question.objects.all().prefetch_related('question_response'):
             q_dict = model_to_dict(question)
+            if not  q_dict['image_path'].name:
+                q_dict['image_path'] = None
+            else:
+                q_dict['image_path'] = q_dict['image_path'].name
+
             a_dict = list(question.question_response.all().values())
             if user_responses:
                 u_dict = {

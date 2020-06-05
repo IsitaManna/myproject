@@ -146,11 +146,11 @@ def recommendImagesBasedOnRating(request):
 @csrf_exempt
 @api_view(['POST'])
 @schema(recommend_images_based_on_input)
-def recommendImagesBasedOnInput(request):
-    ocrimages = pd.read_csv("/home/sancharig/Documents/Biloba/ocrimages.csv")
+def recommendImagesBasedOnInputTest(request):
+    # ocrimages = pd.read_csv("/home/tebackup/Workspace/Laiout/ocrimages.csv")
     floorTags=["balcony/ porch","bath","bedroom","bonus","closet","deck/outdoor space","den","dining room",
            "door","entry","firepit/fireplace","garage","hot tub","kitchen/living room","kitchen","laundry",
-           "living room","mudroom","office","pantry","stair","storage","sunroom","utility","WIC","window",'master bedroo',
+           "living room","mudroom","office","pantry","stair","storage","sunroom","utility","WIC","window",
            "living/ dining","kitchen/dining","hall","linen","Misc/cinema"]
     customer = request.data['CustID']
     dataList = UserResponse.objects.filter(user_id=customer).values()
@@ -192,18 +192,46 @@ def recommendImagesBasedOnInput(request):
     # print(custDict.keys())
     imglist = []
     imgdistList = []
-    for img in ocrimages['image_name']:
-        # imgdist = {}
-        imglist.append(img)
-        imgdict = eval(ocrimages[ocrimages['image_name']==img]['tag_vector'].iloc[0])
-        # print(imgdict)
+    new_li = []
+    ocrimages = OCRImage.objects.all()
+    for img in ocrimages:
+        # # imgdist = {}
+        # imglist.append(img)
+        # imgdict = eval(ocrimages[ocrimages['image_name']==img]['tag_vector'].iloc[0])
+        # print('\nImage Dict- ',imgdict)
+        imgdict = json.loads(img.data_dict)
+        print(imgdict)
         imgvect = list(imgdict.values())
+        print('\n\n Image vect',imgvect)
         # print(imgdict.keys())
         dst = distance.euclidean(custvect, imgvect)
         # imgdist['dist'] = dst
+        print('distance- ', dst)
         imgdistList.append(dst)
-    recom_img_index = imgdistList.index(min(imgdistList))
+        new_li.append({"img":str(img.image_path),"dist":dst})
+    # recom_img_index = imgdistList.index(min(imgdistList))
+    print('index- ',new_li)
     img_name = imglist[recom_img_index]
     print(img_name, "index at ",recom_img_index, "eucld dist: ",min(imgdistList))
-    return JsonResponse(custDict,safe=False)
-    
+    # return JsonResponse(custDict,safe=False)
+    return JsonResponse({"hell":"ohh"},safe=False)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@schema(recommend_images_based_on_input)
+def recommendImagesBasedOnInput(request):
+    di = [
+        {
+            "id":1,
+            "image": "media/floor_plans/142.jpg",
+            "dist": 0.021
+        },
+        {
+            "id":2,
+            "image": "media/floor_plans/142.jpg",
+            "dist": 0.023
+        },
+
+    ]
+    return JsonResponse(di,safe=False)

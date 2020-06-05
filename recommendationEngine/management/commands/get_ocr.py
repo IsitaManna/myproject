@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from recommendationEngine.Utils.OCRimage import ocr_extract_from_images
+from recommendationEngine.Utils.ocr_image import ocr_extract_from_images
 
 
 

@@ -1,5 +1,7 @@
-// const apiBackendBaseUrl = "http://192.168.1.13:8000/recommendation-engine";
-const apiBackendBaseUrl = "http://e9a8b8cc.ngrok.io/recommendation-engine";
+
+apiBackendBaseUrl=environments.apiBackendBaseUrl;
+imageBaseUrl=environments.imageBaseUrl;
+
 
 
 $(document).ready(function(){
@@ -65,13 +67,16 @@ function registerUser(){
     var lastName = document.registration.lastName.value;
     var email = document.registration.email.value;
     var password = document.registration.password.value;
+    var confpassword = document.registration.confpassword.value;
     var contactNo = document.registration.contactNo.value;
     var country = document.registration.country.value;
     var city = document.registration.city.value;
 
-    if(firstName != "" && lastName != "" && email != "" && password != "" && contactNo != "" && country != "" && city != ""){
+    if(firstName != "" && lastName != "" && email != "" && confpassword !="" && password != "" && contactNo != "" && country != "" && city != ""){
       var emailValidationCheck = validateEmail(email);
-      if(emailValidationCheck){
+      var passwordValidationCheck = validatePassword(password,confpassword);
+      if(emailValidationCheck && passwordValidationCheck){
+
         if(contactNo.toString().length < 10){
           swal({
             title: "Warning",
@@ -130,14 +135,25 @@ function registerUser(){
           //   });
           // }); 
         }
+
       }
       else{
-        swal({
-          title: "Error",
-          text: "Please provide a valid email",
-          icon: "error",
-        });
+        if(passwordValidationCheck == false){
+          swal({
+            title: "Error",
+            text: "Passwords don't match",
+            icon: "error",
+          });
+        }
+        else{
+          swal({
+            title: "Error",
+            text: "Please provide a valid email",
+            icon: "error",
+          });
+        }
       }
+        
     }
     else{
       swal({
@@ -161,6 +177,16 @@ function validateEmail(email){
     return false;
   }
 }
+
+
+function validatePassword(password,confpassword){
+  if(password == confpassword){
+    return true;
+  }
+  else
+  return false;
+}
+
 
 function base64url(source) {
   // Encode in classical base64

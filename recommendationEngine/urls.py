@@ -3,8 +3,9 @@ from django.urls import path
 from . import views
 from .Views import customer_views
 from .Views import question_views
-
-
+from .Views import recommend_views
+from .Views import result_conversion_view
+from .Views import style_view
 
 urlpatterns = [
     path('question-response',question_views.QuestionResponseView.as_view(),name='question_response'),
@@ -23,9 +24,17 @@ urlpatterns = [
     path('update-image-rating',views.updateImageRating,name='updateImageRating'),
 
     path('get-customer-response-data',views.get_customer_response_data,name='get_customer_response_data'),
+    path('recommend-images-based-on-input',views.recommendImagesBasedOnInput,name='recommendImagesBasedOnInput'),
 
     path('register-customer',customer_views.CustomerSignupView.as_view(),name='register_customer'),
     path('login-customer',customer_views.CustomerLoginView.as_view(),name = 'loginCustomer'),
     path('create-customer-response',customer_views.CustomerResponseView.as_view(),name='create_customer_response'),
-    path('recommend-images-based-on-input',views.recommendImagesBasedOnInput,name='recommendImagesBasedOnInput')
+    path('customer-response-recommendation',recommend_views.RecommendPlanView.as_view(),name='recommendplan'),
+    path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating'),
+    path('similar-plan',recommend_views.CollabFilteringRecommendView.as_view(),name='collabfiltering'),
+    path('plan-style',style_view.OuterShapeStyleView.as_view(),name='styleimg'),
+    path('bedroom-style',style_view.BedroomStyleView.as_view(),name='bedroomstyle'),
+    path('customer-rating',recommend_views.RecommendationRatingView.as_view(),name='recommendationrating')
+
+
 ]

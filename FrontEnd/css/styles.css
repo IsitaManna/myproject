@@ -11,6 +11,13 @@
     color: #000000;
     background-color: #ceff9a;
     padding: 2px 0px;
+
+}
+.defaultBtn{
+    background-color: #BADA55;
+    color: #000000;
+    border: #BADA55;
+
 }
 a {
     color: #6D7377;
@@ -26,6 +33,7 @@ a:hover{
     width: 100%;
     height: 100%;
 }
+
 /* #styleQuestionsList{
     height: 330px;
     overflow-y: scroll;
@@ -70,7 +78,16 @@ input[type=checkbox], input[type=radio]{
   .hovereffect:hover .overlay {
     opacity: 1;
   }
+  footer{
+    border-top: 1px solid;
+    margin-top: 2%;
+    background-color: #e2fac3;
+  }
+  img{ margin:10px;}
+    .selected,.selectedImg{border:solid 1px white;
+    box-shadow:0px 12px 22px 1px #333;
 
+}
 
 /* 
     #e2fac3 
