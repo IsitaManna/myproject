@@ -83,11 +83,20 @@ class BedroomStyleView(APIView):
             ).style.image_path.path
             files = {'file': open(image_pth, 'rb')} 
             req = requests.post(settings.GAN_HOST+'/input',files=files)
-
+            print('#'*20)
+            print(req.json())
+            print(req)
             get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'])
+            print('DONE')
+            if not OCRImage.objects.filter(user=request.user).exists():
+                ocr_img = OCRImage(data_dict=None, user=request.user)
+                print(get_image.content)
+                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
+            else:
+                print('not')
+                ocr_img = OCRImage.objects.get(user=request.user)
+                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
 
-            ocr_img = OCRImage(data_dict=None)
-            ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
         else:
             return Response(data={"message":"id has no parent","status":400}, status=400)
         
