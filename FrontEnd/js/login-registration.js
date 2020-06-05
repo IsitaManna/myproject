@@ -1,5 +1,7 @@
+
 apiBackendBaseUrl=environments.apiBackendBaseUrl;
 imageBaseUrl=environments.imageBaseUrl;
+
 
 
 $(document).ready(function(){
@@ -176,6 +178,7 @@ function validateEmail(email){
   }
 }
 
+
 function validatePassword(password,confpassword){
   if(password == confpassword){
     return true;
@@ -183,6 +186,7 @@ function validatePassword(password,confpassword){
   else
   return false;
 }
+
 
 function base64url(source) {
   // Encode in classical base64

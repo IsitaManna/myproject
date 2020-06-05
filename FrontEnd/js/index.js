@@ -28,17 +28,22 @@ window.onload = function() {
       "data": JSON.stringify(data),
     };
     $.ajax(settings).done(function (response) {
+
         // console.log("response from Api ------",response,response.length) ;
+
         num_of_questions=response.length;
         var i=0;
         response.forEach(element => {
+
             i++;
             console.log(element.Question.question_type);
            
+
                 var htmldivs='<label id="question-'+element.Question.id+'"><b>'+element.Question.question+'</b></label><br>'
                 var radio="";
                 var i=0;
                 element.Answer.forEach(answer => {
+
                     //---------checkings are kept for demo purpose as placeholders--------
                     //---------to be removed later-----------------
                     i++;
@@ -49,7 +54,6 @@ window.onload = function() {
                         else
                         radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
-
 
                     }
                     else if(element.Question.id == 17){
@@ -181,7 +185,7 @@ function submitResponse(){
         }
 
     }
-    
+
     if(allResponseFilled){
     var url = apiBackendBaseUrl + "/create-customer-response";
     var responsedata={
@@ -204,6 +208,7 @@ function submitResponse(){
             // createJwtToken(1200,email);
             swal({
               title: "Success",
+
               text: response["message"]+"!",
               icon: "success",
             }).then( function(){
@@ -216,6 +221,7 @@ function submitResponse(){
                 // $('#Styletab').addClass('active');
                 // $(this).scrollTop(0);
           });
+
         }
         else{
             swal({
@@ -441,4 +447,5 @@ function submitStyleChoice(){
     
 
 }
+
 

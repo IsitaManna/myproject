@@ -38,6 +38,7 @@ a:hover{
 
 .rating span:hover, .rating span:hover ~ span{
     color: red;
+
 } */
 .star{
     color: goldenrod;
@@ -63,3 +64,5 @@ a:hover{
     margin-top: 2%;
     background-color: #e2fac3;
   }
+}
+
