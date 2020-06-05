@@ -1,5 +1,5 @@
-const apiBackendBaseUrl = "http://65b09446.ngrok.io/recommendation-engine";
-const imageBaseUrl = "http://65b09446.ngrok.io/media/";
+apiBackendBaseUrl=environments.apiBackendBaseUrl;
+imageBaseUrl=environments.imageBaseUrl;
 var num_of_questions=0;
 window.onload = function() {
     addScrollEvent();
