@@ -6,9 +6,10 @@ from rest_framework.response import Response
 from django.forms.models import model_to_dict
 from django.conf import settings
 from django.core.files.base import ContentFile
+from io import BytesIO
 
 from recommendationEngine.models import UserResponse, StyleImage, UserStyle, OCRImage
-
+from recommendationEngine.Utils.color_white import *
 
 class OuterShapeStyleView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -91,11 +92,18 @@ class BedroomStyleView(APIView):
             if not OCRImage.objects.filter(user=request.user).exists():
                 ocr_img = OCRImage(data_dict=None, user=request.user)
                 print(get_image.content)
+                img = get_image.content
+                # colored_house,textcoordlist=convert_result(img)
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
             else:
                 print('not')
                 ocr_img = OCRImage.objects.get(user=request.user)
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
+                plan,textcoordlist=convert_result("./media/floor_plans/GAN_image.png")
+                plan=Image.fromarray(plan)
+                buffer = BytesIO()
+                plan.save(fp=buffer, format='png')
+                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(buffer.getvalue()))
 
         else:
             return Response(data={"message":"id has no parent","status":400}, status=400)

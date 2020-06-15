@@ -24,10 +24,10 @@ class RecommendPlanView(APIView):
         li = []
         for i in plans:
             li.append({"img": str(i.image_path), "dist": 3.0, "id": i.id})
-        
         data = {
             "recommendation": li
         }
+        return Response(data=data, status=200)
         # user_response = UserResponse.objects.filter(user_id=request.user.id)
         # if user_response:
         #     customer_vect = get_customer_reponse_vect(user_response)
