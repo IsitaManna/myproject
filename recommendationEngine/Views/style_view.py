@@ -95,11 +95,16 @@ class BedroomStyleView(APIView):
                 img = get_image.content
                 # colored_house,textcoordlist=convert_result(img)
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
+                plan,dim_list=convert_result("./media/floor_plans/GAN_image.png")
+                plan=Image.fromarray(plan)
+                buffer = BytesIO()
+                plan.save(fp=buffer, format='png')
+                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(buffer.getvalue()))
             else:
                 print('not')
                 ocr_img = OCRImage.objects.get(user=request.user)
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
-                plan,textcoordlist=convert_result("./media/floor_plans/GAN_image.png")
+                plan,dim_list=convert_result("./media/floor_plans/GAN_image.png")
                 plan=Image.fromarray(plan)
                 buffer = BytesIO()
                 plan.save(fp=buffer, format='png')
@@ -108,4 +113,4 @@ class BedroomStyleView(APIView):
         else:
             return Response(data={"message":"id has no parent","status":400}, status=400)
         
-        return Response(data={"message":"Success","status":201}, status=201)
+        return Response(data={"message":"Success","dimesion":dim_list,"status":201}, status=201)

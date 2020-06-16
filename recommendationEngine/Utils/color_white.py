@@ -184,7 +184,7 @@ def get_coords(colored_house,color_list):
         y_coord = colors[(colors['r']==r)&(colors['g']==g)&(colors['b']==b)].iloc[math.floor(ind)]['y_coord']
         coords['x_coord'] = x_coord
         coords['y_coord'] = y_coord
-        print(coords)
+        # print(coords)
         if coords['area']>10:
             coordList.append(coords)
     return coordList
@@ -196,6 +196,7 @@ def get_room_tags(coordList):
         tagCoord = {}
         tagCoord['x_coord'] = item["x_coord"]
         tagCoord['y_coord'] = item["y_coord"]
+        tagCoord['area'] = item["area"]
         colList = []
         dstlist = []
         itemcol = np.array(item['color'])
@@ -220,6 +221,7 @@ def get_room_tags(coordList):
         if (item['y_coord'] not in list1) & (item['y_coord']+1 not in list1) & (item['y_coord']-1 not in list1):
             list1.append(item['y_coord'])
             new_textcoordlist.append(item)
+    # print(new_textcoordlist)
     return new_textcoordlist
 
 def write_text(colored_house,textcoordlist):
@@ -227,22 +229,42 @@ def write_text(colored_house,textcoordlist):
     fontScale              = 1
     fontColor              = (0,0,0)
     for item in textcoordlist:
-        cv2.putText(colored_house,item["text"].upper(), 
-            (item["x_coord"],item["y_coord"]), 
-            font, 
-            fontScale,
-            fontColor)
+        if item['text']!='stair':
+            cv2.putText(colored_house,item["text"].upper(), 
+                (item["x_coord"],item["y_coord"]), 
+                font, 
+                fontScale,
+                fontColor)
 
 def convert_result(img):
     img_orig = cv2.imread(img)
+    # img_orig=np.float32(img)
     RGB_img = cv2.cvtColor(img_orig, cv2.COLOR_BGR2RGB)
     img=cv2.cvtColor(RGB_img, cv2.COLOR_RGB2GRAY)
     colored_house, color_list = find_rooms(RGB_img,img.copy())
     coordList = get_coords(RGB_img, color_list)
     textcoordlist = get_room_tags(coordList)
+    dimension_list=[]
+    covered_area = 0
+    for item in textcoordlist:
+        if item['text']!='stair':
+            covered_area+=item['area']
+    img=Image.fromarray(colored_house)
+    width,height=img.size
+    total_area=width*height
+    print(total_area)
+    for item in textcoordlist:
+        dim = {}
+        if item['text']!='stair':
+            dim['room']=item['text']
+            dim['area_perc']=round((item['area']/total_area)*100,2)
+            dimension_list.append(dim)
+    dim={}
+    dim['room']='unplanned area'
+    dim['area']=round((total_area-covered_area)/total_area*100,2)
+    dimension_list.append(dim)
     img1=cv2.cvtColor(RGB_img, cv2.COLOR_RGB2GRAY)
     plan=color_white(img1)
     write_text(plan,textcoordlist)
-    # im1=Image.fromarray(plan)
-    # im1.save("myfile_3.jpg")
-    return plan,textcoordlist
+    print(dimension_list)
+    return plan,dimension_list
