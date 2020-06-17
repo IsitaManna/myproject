@@ -261,7 +261,7 @@ def convert_result(img):
             dimension_list.append(dim)
     dim={}
     dim['room']='unplanned area'
-    dim['area']=round((total_area-covered_area)/total_area*100,2)
+    dim['area_perc']=round((total_area-covered_area)/total_area*100,2)
     dimension_list.append(dim)
     img1=cv2.cvtColor(RGB_img, cv2.COLOR_RGB2GRAY)
     plan=color_white(img1)
