@@ -45,20 +45,34 @@ window.onload = function() {
             imgid.push(id);
             console.log(imgid.length);
             count++;
-            if(count>3){
+            // ----two images in one row-------
+            if(count>2){
                 count =0;
                 finalRow='<div class = "row" style="margin-top : 2%" >';
                 columns=columns+'</div>'+finalRow;
             }
-            var eachcolumn = '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">'+
+          // ------ dimensions-------------------
+            var dimdiv="";
+            element.dimension.forEach(dim => {
+              console.log(dim);
+              dimdiv=dimdiv+'<span><b>'+dim.room+' :</b> '+dim.area_perc
+              +'% </span> <br> '
+            });
+            // -----------------------------------
+            // --------each image column-----------
+            var eachcolumn = '<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">'+
             '<div class="card" >'+
                 '<div class="card-body" style="padding-bottom : 1px">'+
                     '<div class ="row">'+
-                        '<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="download-area">'+
+                        '<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" id="download-area">'+
                         '<a href='+imageBaseUrl+element.img+' target="_blank" >'+
                         '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</a>'+
                         '</div>'+
+                        '<div class ="col-xs-4" style="margin-top: 4%;">'+
+                      '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
+                      '</span>'+
+                      '</div>'+
                     '</div>'+
                     '<div class="row">'+
                        ' <div class ="col-xs-8">'+
@@ -76,6 +90,12 @@ window.onload = function() {
                           '</a>'+
                         '</div>'+
                     '</div>'+
+                    // '<div class="row">'+
+                    //   ' <div class ="col-xs-12">'+
+                    //   '<span><b>Dimesions :</b>'+dimdiv
+                    //   +' </span>'
+                    //   '</div>'+
+                    // '</div>'+
                ' </div>'+
             '</div>'+
         '</div>'

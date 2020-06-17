@@ -3,7 +3,7 @@ imageBaseUrl=environments.imageBaseUrl;
 var num_of_questions=0;
 window.onload = function() {
     addScrollEvent();
-    // createStyleTab()
+    
 
     // ------- Qualitative and Quantitative Tabs---------------
     var name = this.localStorage.getItem("name");
@@ -177,6 +177,7 @@ function selectImage(id){
 function submitStyleChoice(){
     var element=$('.selected').attr("id");
     var id=element.split("-")[1];
+    $('#overlay').fadeIn();
     console.log("Submitted!!!",id);
     var url = apiBackendBaseUrl + "/bedroom-style";
 
@@ -194,6 +195,8 @@ function submitStyleChoice(){
     $.ajax(settings).done(function (response) {
         console.log("response in submission---",response);
         if(response["status"] == 201){
+            $('#overlay').fadeOut();
+
     
             // createJwtToken(1200,email);
             swal({

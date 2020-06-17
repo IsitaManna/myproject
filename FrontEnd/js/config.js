@@ -1,4 +1,4 @@
 var environments ={
-     apiBackendBaseUrl : "http://ad4fc241.ngrok.io/recommendation-engine",
-     imageBaseUrl : "http://ad4fc241.ngrok.io/media/"
+     apiBackendBaseUrl : "https://15d8fb5c6e7f.ngrok.io/recommendation-engine",
+     imageBaseUrl : "https://15d8fb5c6e7f.ngrok.io/media/"
 }
