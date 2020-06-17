@@ -85,30 +85,22 @@ class BedroomStyleView(APIView):
             files = {'file': open(image_pth, 'rb')} 
             req = requests.post(settings.GAN_HOST+'/input',files=files)
             print('#'*20)
-            print(req.json())
-            print(req)
-            get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'])
+            # print(req.json())
+            # print(req)
+            get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'],stream=True).raw
+            image = np.asarray(bytearray(get_image.read()), dtype="uint8")
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            plan,dim_list=convert_result(image)
+            plan=Image.fromarray(plan)
+            buffer = BytesIO()
+            plan.save(fp=buffer, format='png')
             print('DONE')
             if not OCRImage.objects.filter(user=request.user).exists():
-                ocr_img = OCRImage(data_dict=None, dim_dict=None, user=request.user)
-                print(get_image.content)
-                img = get_image.content
-                # colored_house,textcoordlist=convert_result(img)
-                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
-                plan,dim_list=convert_result("./media/floor_plans/GAN_image.png")
-                plan=Image.fromarray(plan)
-                buffer = BytesIO()
-                plan.save(fp=buffer, format='png')
-                ocr_img.dim_dict=dim_list
+                ocr_img = OCRImage(data_dict=None, dim_dict=dim_list, user=request.user)
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(buffer.getvalue()))
             else:
                 print('not')
                 ocr_img = OCRImage.objects.get(user=request.user)
-                ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(get_image.content))
-                plan,dim_list=convert_result("./media/floor_plans/GAN_image.png")
-                plan=Image.fromarray(plan)
-                buffer = BytesIO()
-                plan.save(fp=buffer, format='png')
                 ocr_img.dim_dict=dim_list
                 ocr_img.image_path.save(name='GAN_image.png',content=ContentFile(buffer.getvalue()))
 
