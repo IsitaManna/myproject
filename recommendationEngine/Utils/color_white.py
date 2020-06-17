@@ -145,7 +145,7 @@ def find_rooms(img_orig,img,  noise_removal_threshold=60, corners_threshold=0.1,
             color = img_orig[component][math.floor(ind)]
             img[component] = color
             color_list.append(color)
-    # print("colors-->",(len(color_list)))
+    print("colors-->",(len(color_list)))
     return img, color_list
 
 def get_coords(colored_house,color_list):
@@ -237,7 +237,7 @@ def write_text(colored_house,textcoordlist):
                 fontColor)
 
 def convert_result(img):
-    img_orig = cv2.imread(img)
+    img_orig = img
     # img_orig=np.float32(img)
     RGB_img = cv2.cvtColor(img_orig, cv2.COLOR_BGR2RGB)
     img=cv2.cvtColor(RGB_img, cv2.COLOR_RGB2GRAY)

@@ -43,6 +43,7 @@ class UserResponse(models.Model):
 class OCRImage(models.Model):
     image_path = models.FileField(upload_to='floor_plans',null=True)
     data_dict = models.TextField(null=True)
+    dim_dict = models.TextField(null=True)
     user = models.ForeignKey(User,null=True,unique=True, related_name='user_ocr', on_delete=models.SET_NULL)
 
 

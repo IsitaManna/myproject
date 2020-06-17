@@ -23,7 +23,8 @@ class RecommendPlanView(APIView):
         plans = OCRImage.objects.filter(user=request.user)
         li = []
         for i in plans:
-            li.append({"img": str(i.image_path), "dist": 3.0, "id": i.id})
+            # print(type(i.dim_dict))
+            li.append({"img": str(i.image_path),"dimension":i.dim_dict, "dist": 3.0, "id": i.id})
         data = {
             "recommendation": li
         }
@@ -46,7 +47,7 @@ class RecommendPlanView(APIView):
 class RecommendationRatingView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-
+    
     def get(self, request):
         user_rating = Rating.objects.filter(user_id=request.user.id)
         if user_rating:
