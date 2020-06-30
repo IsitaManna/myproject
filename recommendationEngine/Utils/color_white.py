@@ -221,8 +221,16 @@ def get_room_tags(coordList):
         if (item['y_coord'] not in list1) & (item['y_coord']+1 not in list1) & (item['y_coord']-1 not in list1):
             list1.append(item['y_coord'])
             new_textcoordlist.append(item)
-    # print(new_textcoordlist)
-    return new_textcoordlist
+    list2 = []
+    new_textcoordlist1 = []
+    for item in new_textcoordlist:
+        if item["text"]=='balcony/ porch' or item["text"]=='deck/ outdoor space' or item["text"]=='bath':
+            if item not in list2:
+                list2.append(item)
+        else:
+            list2.append(item)
+    return list2
+    # return new_textcoordlist
 
 def write_text(colored_house,textcoordlist):
     font = cv2.FONT_HERSHEY_COMPLEX_SMALL
@@ -230,11 +238,23 @@ def write_text(colored_house,textcoordlist):
     fontColor              = (0,0,0)
     for item in textcoordlist:
         if item['text']!='stair':
-            cv2.putText(colored_house,item["text"].upper(), 
-                (item["x_coord"],item["y_coord"]), 
-                font, 
-                fontScale,
-                fontColor)
+            if " " in item["text"]:
+                li=item["text"].split()
+                offset=0
+                for txt in li:
+                    cv2.putText(colored_house,txt.upper(), 
+                        (item["x_coord"]-10,item["y_coord"]+offset), 
+                        font, 
+                        fontScale,
+                        fontColor)
+                    offset+=20
+            else:
+                cv2.putText(colored_house,item["text"].upper(), 
+                        (item["x_coord"],item["y_coord"]), 
+                        font, 
+                        fontScale,
+                        fontColor)
+
 
 def convert_result(img):
     img_orig = img
