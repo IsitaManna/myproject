@@ -31,7 +31,7 @@ if os.getenv('MODE') == 'Prod':
 else:
     DEBUG = True
 
-# ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13"]
+# ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13","127.0.0.1"]
 ALLOWED_HOSTS = "*"
 
 
@@ -213,6 +213,7 @@ LOGGING = {
     }
 }
 
+
 GAN_HOST = 'http://127.0.0.1:5000'
 
 OCR_IMAGE_DIR = '/home/tebackup/Workspace/Laiout/floor_plans/' # absolute path
@@ -223,20 +224,20 @@ PLAN_COLOR_DICT = [{'Floor tags': 'balcony/ porch', 'R': 77, 'G': 11, 'B': 65},
                 {'Floor tags': 'bath', 'R': 2, 'G': 190, 'B': 242},
                 {'Floor tags': 'bedroom', 'R': 163, 'G': 242, 'B': 17},
                 {'Floor tags': 'bonus', 'R': 247, 'G': 231, 'B': 186},
-                {'Floor tags': 'closet', 'R': 18, 'G': 102, 'B': 3},
-                {'Floor tags': 'deck/outdoor space', 'R': 181, 'G': 166, 'B': 66},
+                {'Floor tags': 'clos', 'R': 18, 'G': 102, 'B': 3},
+                {'Floor tags': 'deck/ outdoor space', 'R': 181, 'G': 166, 'B': 66},
                 {'Floor tags': 'den', 'R': 250, 'G': 214, 'B': 165},
                 {'Floor tags': 'dining room', 'R': 189, 'G': 185, 'B': 185},
                 {'Floor tags': 'door', 'R': 245, 'G': 66, 'B': 242},
                 {'Floor tags': 'entry', 'R': 28, 'G': 35, 'B': 145},
-                {'Floor tags': 'firepit/fireplace', 'R': 255, 'G': 117, 'B': 24},
+                {'Floor tags': 'firepit/ fireplace', 'R': 255, 'G': 117, 'B': 24},
                 {'Floor tags': 'garage', 'R': 130, 'G': 102, 'B': 68},
                 {'Floor tags': 'hot tub', 'R': 228, 'G': 155, 'B': 15},
-                {'Floor tags': 'kitchen/living room', 'R': 250, 'G': 233, 'B': 137},
+                {'Floor tags': 'kitchen/ living room', 'R': 250, 'G': 233, 'B': 137},
                 {'Floor tags': 'kitchen', 'R': 171, 'G': 24, 'B': 240},
                 {'Floor tags': 'laundry', 'R': 245, 'G': 137, 'B': 5},
                 {'Floor tags': 'living room', 'R': 17, 'G': 93, 'B': 245},
-                {'Floor tags': 'mudroom', 'R': 112, 'G': 66, 'B': 20},
+                {'Floor tags': 'mud room', 'R': 112, 'G': 66, 'B': 20},
                 {'Floor tags': 'office', 'R': 255, 'G': 0, 'B': 255},
                 {'Floor tags': 'pantry', 'R': 252, 'G': 83, 'B': 83},
                 {'Floor tags': 'stair', 'R': 229, 'G': 192, 'B': 240},
@@ -247,7 +248,8 @@ PLAN_COLOR_DICT = [{'Floor tags': 'balcony/ porch', 'R': 77, 'G': 11, 'B': 65},
                 {'Floor tags': 'window', 'R': 227, 'G': 69, 'B': 30},
                 {'Floor tags': 'master bedroom', 'R': 98, 'G': 98, 'B': 30},
                 {'Floor tags': 'living/ dining', 'R': 40, 'G': 60, 'B': 90},
-                {'Floor tags': 'kitchen/dining', 'R': 100, 'G': 80, 'B': 120},
+                {'Floor tags': 'kitchen/ dining', 'R': 100, 'G': 80, 'B': 120},
                 {'Floor tags': 'hall', 'R': 63, 'G': 72, 'B': 204},
                 {'Floor tags': 'linen', 'R': 225, 'G': 175, 'B': 166},
                 {'Floor tags': 'Misc/cinema', 'R': 34, 'G': 177, 'B': 76}]
+
