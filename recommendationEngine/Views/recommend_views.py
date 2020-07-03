@@ -42,7 +42,7 @@ class RecommendPlanView(APIView):
         #     return Response(data=data, status=200)
         # else:
         #     return Response(data={"message":"Fill form first"}, status=400)
-
+        return Response(data=data,status=200)
 
 class RecommendationRatingView(APIView):
     authentication_classes = [TokenAuthentication]
