@@ -7,9 +7,9 @@ from django.forms.models import model_to_dict
 from django.conf import settings
 from django.core.files.base import ContentFile
 from io import BytesIO
-
+from PIL import Image, ImageDraw, ImageFont
 from recommendationEngine.models import UserResponse, StyleImage, UserStyle, OCRImage
-from recommendationEngine.Utils.color_white import *
+from recommendationEngine.Utils.gan_postprocess import *
 
 class OuterShapeStyleView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -90,7 +90,9 @@ class BedroomStyleView(APIView):
             get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'],stream=True).raw
             image = np.asarray(bytearray(get_image.read()), dtype="uint8")
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            plan,dim_list=convert_result(image)
+            # plan,dim_list=convert_result(image)
+            color_tag = pd.DataFrame(settings.PLAN_COLOR_DICT)
+            plan,dim_list = gan_convert(image, color_tag)
             plan=Image.fromarray(plan)
             buffer = BytesIO()
             plan.save(fp=buffer, format='png')
