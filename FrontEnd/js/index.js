@@ -29,13 +29,22 @@ window.onload = function() {
     };
     $.ajax(settings).done(function (response) {
 
-        // console.log("response from Api ------",response,response.length) ;
-
+        console.log("response from Api ------",response,response.length) ;
+        questions=[]
         num_of_questions=response.length;
         var i=0;
         response.forEach(element => {
-
+            
             i++;
+            questions[i]=element.Question.id;
+            // console.log(element.Question.id);
+            
+        });
+        // console.log(questions);
+        response.forEach(element => {
+            
+            i++;
+            
             console.log(element.Question.question_type);
            
 
@@ -97,28 +106,28 @@ window.onload = function() {
                     }
                 });
                 var imagediv=''
-                if(element.Question.id == 9){
-                    var imgUrl = imageBaseUrl + element.Question.image_path;
-                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
-                    // imagediv='<img src="../images/questions/fire.jpeg" style="width:100%;height:100%">'
-                }
-                else if (element.Question.id == 1){
+                // if(element.Question.id == 9){
+                //     var imgUrl = imageBaseUrl + element.Question.image_path;
+                //     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
+                //     // imagediv='<img src="../images/questions/fire.jpeg" style="width:100%;height:100%">'
+                // }
+                if (element.Question.id == 1){
                     var imgUrl = imageBaseUrl + element.Question.image_path;
                     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 }
                
-                else if(element.Question.id == 23){
-                    var imgUrl = imageBaseUrl + element.Question.image_path;
-                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
-                }
-                else if(element.Question.id == 11){
-                    var imgUrl = imageBaseUrl + element.Question.image_path;
-                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
-                }
-                else if(element.Question.id == 14){
-                    var imgUrl = imageBaseUrl + element.Question.image_path;
-                    imagediv='<img src="' + imgUrl + '" style="width:100%;">';
-                }
+                // else if(element.Question.id == 23){
+                //     var imgUrl = imageBaseUrl + element.Question.image_path;
+                //     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
+                // }
+                // else if(element.Question.id == 11){
+                //     var imgUrl = imageBaseUrl + element.Question.image_path;
+                //     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
+                // }
+                // else if(element.Question.id == 14){
+                //     var imgUrl = imageBaseUrl + element.Question.image_path;
+                //     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
+                // }
                 if(element.Question.id == 6 || element.Question.id == 17){
                     var finalHtml='<div class="card" >'+
                 '<div id="divid'+i+'" href="divid'+(i+1)+'" class="card-body" style="padding-bottom : 1px">'+
@@ -158,18 +167,22 @@ window.onload = function() {
             $('#qualitative').append(finalHtml);
             }
         });
+
       });
+      
   };
 
 // -------Submitting response of qualitative and quantitative questionarre---------
 function submitResponse(){
     var token = this.localStorage.getItem("token");
-
+    
     var i=0;
     var responseList=[];
     var allResponseFilled=true;
     for(i=1;i<=num_of_questions;i++){
-        var radioValue = $("input[name='radio"+i+"']:checked").attr("id");
+        qid=questions[i]
+        var radioValue = $("input[name='radio"+qid+"']:checked").attr("id");
+
         if(radioValue == undefined){
             allResponseFilled=false;
             swal({
@@ -181,7 +194,7 @@ function submitResponse(){
         }
         else{
         var respId=radioValue.split("-")[1];
-        responseList.push({QuesID : i, ResponseID : respId});
+        responseList.push({QuesID : qid, ResponseID : respId});
         }
 
     }
