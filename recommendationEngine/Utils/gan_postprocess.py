@@ -63,9 +63,10 @@ def place_text(img,clust, centers, tag_file):
             min_rect = cv2.minAreaRect(c)
             if color_list in centers.tolist() and min(min_rect[1][1], min_rect[1][0]) > 20:
                 tag = get_tag(color, tag_file)
-                cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 0, 0))
+                cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
                 leg['room']=str(i)
-                leg['area_perc']=str({'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) })
+                leg['area_perc']=tag+"-"+str(round((cont_area/max_contarea)*100, 2))
+                # leg['area_perc']={'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) }
                 legends.append(leg)
                 # legends.update({"room":str(i), "area_perc": str({'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) })})
                 i+=1
