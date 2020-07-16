@@ -58,10 +58,10 @@ window.onload = function() {
                     i++;
                     if(element.Question.id == 6){
                         if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+ element.Question.id +'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" checked="checked" name="radio'+ element.Question.id +'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
                         else
-                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
 
                     }
@@ -69,28 +69,28 @@ window.onload = function() {
                         //--------- checkings are kept for space issues in UI---------
                        if(answer.id == 86 ){
                         if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
-                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         
                        }
                        else if (answer.id == 88){
                         if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
-                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                          
                        }
                        else{
                         if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                         else
-                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/house_style/image'+i+'.jpg" style="width:20%; height : 43%">&nbsp;&nbsp;&nbsp;&nbsp;'
                        }
                        if ( i==3 ){
@@ -100,9 +100,9 @@ window.onload = function() {
                     }
                     else{
                     if(answer.id == element.User_Response.answer_id)
-                    radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
+                    radio+='<input type="radio" checked="checked" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
                     else 
-                    radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
+                    radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label><br>'
                     }
                 });
                 var imagediv=''

@@ -1,6 +1,5 @@
 ### Global ###
 *.env
-*.jpg
 *.jpeg
 *.png
 *.log
