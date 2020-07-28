@@ -56,14 +56,22 @@ window.onload = function() {
                     //---------checkings are kept for demo purpose as placeholders--------
                     //---------to be removed later-----------------
                     i++;
-                    if(element.Question.id == 6){
-                        if(answer.id == element.User_Response.answer_id)
-                        radio+='<input type="radio" checked="checked" name="radio'+ element.Question.id +'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
-                        else
-                        radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
-                        '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
+                  
+                    
+                    // if(element.Question.id == 6){
+                    //     if(answer.id == element.User_Response.answer_id)
+                    //     radio+='<input type="radio" checked="checked" name="radio'+ element.Question.id +'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                    //     '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
+                    //     else
+                    //     radio+='<input type="radio" name="radio'+element.Question.id+'" id="answer-'+answer.id+'" value="'+answer.answer+'">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="'+answer.answer+'">'+answer.answer+'</label>'+
+                    //     '&nbsp;<img src="../images/questions/image'+i+'.jpg" style="width:43%; height : 83%"> &nbsp;'
 
+                    // }
+                     if (element.Question.id == 16) {
+                        if (answer.id == element.User_Response.answer_id)
+                            radio += '<input type="checkbox" checked="checked" name="radio' + element.Question.id + '" id="answer-' + answer.id + '" value="' + answer.answer + '">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="' + answer.answer + '">' + answer.answer + '</label><br>'
+                        else
+                            radio += '<input type="checkbox" name="radio' + element.Question.id + '" id="answer-' + answer.id + '" value="' + answer.answer + '">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="' + answer.answer + '">' + answer.answer + '</label><br>'
                     }
                     else if(element.Question.id == 17){
                         //--------- checkings are kept for space issues in UI---------
@@ -128,7 +136,7 @@ window.onload = function() {
                 //     var imgUrl = imageBaseUrl + element.Question.image_path;
                 //     imagediv='<img src="' + imgUrl + '" style="width:100%;">';
                 // }
-                if(element.Question.id == 6 || element.Question.id == 17){
+                if(element.Question.id == 17){
                     var finalHtml='<div class="card" >'+
                 '<div id="divid'+i+'" href="divid'+(i+1)+'" class="card-body" style="padding-bottom : 1px">'+
                     ' <div class="row">'+
@@ -180,25 +188,39 @@ function submitResponse(){
     var responseList=[];
     var allResponseFilled=true;
     for(i=1;i<=num_of_questions;i++){
-        qid=questions[i]
-        var radioValue = $("input[name='radio"+qid+"']:checked").attr("id");
+        qid=questions[i];
 
-        if(radioValue == undefined){
-            allResponseFilled=false;
-            swal({
-                title: "Error",
-                text: "Please answer all Questions",
-                icon: "error",
-              });
-            
-        }
-        else{
-        var respId=radioValue.split("-")[1];
-        responseList.push({QuesID : qid, ResponseID : respId});
-        }
+        // if ($("input[name='radio" + qid + "']").is(':checkbox')) {
+        //     console.log(qid);
+        //     var selectedboxes = []
+        //     selectedboxes = $("input[name='radio16']:checked");
+        //     var checkedboxes = [];
+        //     Array.from(selectedboxes).forEach(element => {
+        //         checkedboxes.push($(element).attr("id").split("-")[1]);
+        //     });
+        //     responseList.push({ QuesID: qid, ResponseID: checkedboxes });
+
+        // }
+        // else {
+            var radioValue = $("input[name='radio" + qid + "']:checked").attr("id");
+
+            if (radioValue == undefined) {
+                allResponseFilled = false;
+                swal({
+                    title: "Error",
+                    text: "Please answer all Questions",
+                    icon: "error",
+                });
+
+            }
+            else {
+                var respId = radioValue.split("-")[1];
+                responseList.push({ QuesID: qid, ResponseID: respId });
+            }
+        // }
 
     }
-
+    console.log(responseList);
     if(allResponseFilled){
     var url = apiBackendBaseUrl + "/create-customer-response";
     var responsedata={

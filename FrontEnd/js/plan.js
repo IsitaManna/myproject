@@ -32,11 +32,12 @@ window.onload = function() {
       "headers": {
         "Content-Type": "application/json",
         "Authorization" : token
-          },
+
+       },
       "data": JSON.stringify(data),
     };
     // console.log(settings);
-    $.ajax(settings).done(function (response) {
+    $.get(settings).done(function (response) {
        
         console.log("response from Api ------",response,response.length) ;
         var columns='<div class = "row">',count=0;
@@ -165,14 +166,14 @@ window.onload = function() {
                 // createJwtToken(1200,email);
                 swal({
                   title: "Success",
-                  text: response["message"],
+                  text: "Your response has been submitted successfully!",
                   icon: "success",
                 });
             }
             else{
                 swal({
                   title: "Error",
-                  text: response["message"],
+                  text: "Your response could not be submitted. Please try again!",
                   icon: "error",
                 });
               }
@@ -206,6 +207,7 @@ function displayTabContent(tabName)
 function downloadPNGImage(linkElement) {
   var myDiv = document.getElementById('download-area');
   var myImage = myDiv.children[0];
+  // myImage.crossOrigin = "Anonymous";
   let downloadLink = myImage.src + "&format=jpg";
   linkElement.setAttribute('download', downloadLink);
   linkElement.href = downloadLink;
@@ -229,6 +231,8 @@ function forceDownload(url,fileName){
       tag.click();
       document.body.removeChild(tag);
   }
+  // xhr.setRequestHeader('Content-Type', 'image/png');
+  
   xhr.send();
 }
 

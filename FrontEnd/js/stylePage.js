@@ -60,7 +60,7 @@ function createStyleTab(){
 
     var firstRow = '<div class ="row" style="margin-bottom: 2%;">'+
     '<div id="level1" class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'+
-    '<b> Level 1 : Click on the Images to Select the Floor Plan Outer Structure</b>'+
+    '<h4 style="color : #6D7377;text-align: center;"> Select a basic shape for your home. This will help our AI engine be more efficient</h4>'+
     '</div>'+
     '</div>'
     $('#styleLevel1').append(firstRow);
@@ -114,7 +114,7 @@ function getlevel2Images(imageId){
     $('#styleLevel2').empty();
     var firstRow='<div class ="row"  style="margin-bottom: 2%;">'+
                     '<div id= "level2" class="col-md-8 col-lg-8 col-sm-8 col-xs-8">' +
-                        '<b> Level 2 : Click on the Images to Select the Bedroom Position for the Selected Floor Plan</b>'+
+                        '<h4 style="color : #6D7377;"> Click on the Images to Select the Bedroom Position for the Selected Floor Plan</h4>'+
                     '</div>'+
                     '<div id= "level2" class="col-md-4 col-lg-4 col-sm-12 col-xs-12">' +
                         '<a href="#level1" style="float: right; font-size: 14px;" >'+
@@ -201,7 +201,7 @@ function submitStyleChoice(){
             // createJwtToken(1200,email);
             swal({
                 title: "Success",
-                text: response["message"],
+                text: "Processed Successfully!",
                 icon: "success"
               }).then( function(){
                     window.location.href = "plan.html";
@@ -210,7 +210,7 @@ function submitStyleChoice(){
         else{
             swal({
               title: "Error",
-              text: response["message"],
+              text: "Processing Unsuccessful!",
               icon: "error",
             });
           }

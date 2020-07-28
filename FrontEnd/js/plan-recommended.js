@@ -143,7 +143,7 @@ window.onload = function() {
                 // createJwtToken(1200,email);
                 swal({
                   title: "Success",
-                  text: response["message"],
+                  text: "Your response has been submitted successfully!",
                   icon: "success",
                 }).then( function(){
                   window.location.href = "stylePage.html";
@@ -153,7 +153,7 @@ window.onload = function() {
             else{
                 swal({
                   title: "Error",
-                  text: response["message"],
+                  text: "Your response could not be submitted. Please try again!",
                   icon: "error",
                 });
               }
