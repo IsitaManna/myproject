@@ -86,15 +86,15 @@ function createStyleTab(){
         var count=0;
         response.forEach(element => {
             count++;
-            if(count>3){
-                count=0;
+            if(count>12){
+                count=1;
                 newrow=' <div class="row" style="margin-bottom: 2%;"> ';
                 row=row+'</div>'+newrow;
                 
             }
-            var eachcolumn='<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" id="img'+element.id+'" onclick="getlevel2Images('+element.id+')">'+
+            var eachcolumn='<div class="col-md-1 col-lg-1 col-sm-1 col-xs-1" id="img'+element.id+'" onclick="getlevel2Images('+element.id+')">'+
             '<a href="#level2">'+
-                '<img id="l1Image-'+element.id+'" src="'+imageBaseUrl+element.image_path+'" style="width: 100%; float : right;">'+
+                '<img id="l1Image-'+element.id+'" src="'+imageBaseUrl+element.image_path+'" style="width: 100%; height:70%; border:1px solid; float : right;">'+
             ' </a>'+
             '</div>'
             row=row+eachcolumn;
