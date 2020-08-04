@@ -90,6 +90,12 @@ def find_similar_user(current_user):
     for user in User.objects.filter(vector__isnull=False).values('id','vector'):
         vect = json.loads(user['vector'])['Vector']
         np_arr = np.array(vect)
+        if len(curr_user_vect)>len(vect):
+            diff=len(curr_user_vect)-len(vect)
+            a=np.zeros(diff)
+            vect=np.append(vect,a)
+        
+        np_arr = np.array(vect)
         euclid_dist = np.linalg.norm(curr_np_arr - np_arr)
         simi_list.append(
             {
