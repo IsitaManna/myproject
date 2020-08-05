@@ -29,7 +29,7 @@ window.onload = function() {
     };
     $.ajax(settings).done(function (response) {
 
-        console.log("response from Api ------",response,response.length) ;
+        // console.log("response from Api ------",response,response.length) ;
         questions=[]
         num_of_questions=response.length;
         var i=0;
