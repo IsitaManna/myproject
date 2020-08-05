@@ -89,6 +89,7 @@ class CustomerResponseView(APIView):
 
     def post(self, request):
         print(request.data['answers'])
+        UserResponse.objects.filter(user_id=request.user.id).filter(question_id=16).delete()
         for i in request.data['answers']:
             if i['QuesID']==16:
                 for j in range(0,len(i['ResponseID'])):
