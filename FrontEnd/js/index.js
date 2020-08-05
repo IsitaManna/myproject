@@ -190,20 +190,21 @@ function submitResponse(){
     for(i=1;i<=num_of_questions;i++){
         qid=questions[i];
 
-        // if ($("input[name='radio" + qid + "']").is(':checkbox')) {
-        //     console.log(qid);
-        //     var selectedboxes = []
-        //     selectedboxes = $("input[name='radio16']:checked");
-        //     var checkedboxes = [];
-        //     Array.from(selectedboxes).forEach(element => {
-        //         checkedboxes.push($(element).attr("id").split("-")[1]);
-        //     });
-        //     responseList.push({ QuesID: qid, ResponseID: checkedboxes });
+        if ($("input[name='radio" + qid + "']").is(':checkbox')) {
+            // console.log(qid);
+            var selectedboxes = []
+            selectedboxes = $("input[name='radio16']:checked");
+            var checkedboxes = [];
+            Array.from(selectedboxes).forEach(element => {
+                checkedboxes.push($(element).attr("id").split("-")[1]);
+            });
+            console.log(qid,"---",checkedboxes);
+            responseList.push({ QuesID: qid, ResponseID: checkedboxes });
 
-        // }
-        // else {
+        }
+        else {
             var radioValue = $("input[name='radio" + qid + "']:checked").attr("id");
-
+            console.log("Radio Value:",radioValue);
             if (radioValue == undefined) {
                 allResponseFilled = false;
                 swal({
@@ -217,10 +218,10 @@ function submitResponse(){
                 var respId = radioValue.split("-")[1];
                 responseList.push({ QuesID: qid, ResponseID: respId });
             }
-        // }
+        }
 
     }
-    console.log(responseList);
+    // console.log(responseList);
     if(allResponseFilled){
     var url = apiBackendBaseUrl + "/create-customer-response";
     var responsedata={

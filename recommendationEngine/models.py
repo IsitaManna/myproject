@@ -32,11 +32,11 @@ class Answer(models.Model):
 
 class UserResponse(models.Model):
     class Meta:
-        unique_together = ['user', 'question']
+        unique_together = ['user', 'answer']
 
-    user = models.ForeignKey(User, related_name='user_response', on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, related_name='+', on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, related_name='+', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user_response', on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, related_name='+', on_delete=models.DO_NOTHING)
+    answer = models.ForeignKey(Answer, related_name='+', on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 

@@ -88,13 +88,24 @@ class CustomerResponseView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        print(request.data['answers'])
         for i in request.data['answers']:
-            
-            UserResponse.objects.update_or_create(
-                question_id=i['QuesID'],
-                user_id=request.user.id,
-                defaults={'answer_id': i['ResponseID']}
-            )
+            if i['QuesID']==16:
+                for j in range(0,len(i['ResponseID'])):
+                    resp=UserResponse.objects.filter(user_id=request.user.id).filter(question_id=16).values_list('answer_id', flat=True)
+                    responseli=[]
+                    for item in resp:
+                        responseli.append(item)
+                    if int(i['ResponseID'][j]) not in responseli:
+                        userrespobj=UserResponse(user_id=request.user.id,question_id=i['QuesID'],answer_id=int(i['ResponseID'][j]))
+                        userrespobj.save()
+                    
+            else:
+                UserResponse.objects.update_or_create(
+                    question_id=i['QuesID'],
+                    user_id=request.user.id,
+                    defaults={'answer_id': i['ResponseID']}
+                )
         user_response_list = list(UserResponse.objects.filter(
             user_id=request.user.id
         ).values_list('answer_id', flat=True))
