@@ -214,6 +214,8 @@ function forceDownload(url,fileName){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "blob";
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  xhr.setRequestHeader("Access-Control-Allow-Methods", "*");
   xhr.onload = function(){
       var urlCreator = window.URL || window.webkitURL;
       var imageUrl = urlCreator.createObjectURL(this.response);
@@ -224,6 +226,8 @@ function forceDownload(url,fileName){
       tag.click();
       document.body.removeChild(tag);
   }
+  
+  // console.log("header set");
   xhr.send();
 }
 
