@@ -71,7 +71,7 @@ window.onload = function() {
                         '</a>'+
                         '</div>'+
                         '<div class ="col-xs-4" style="margin-top: 4%;">'+
-                      '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
+                      '<span><b style="font-size : 16px">Dimensions :</b><br>'+dimdiv+
                       '</span>'+
                       '</div>'+
                     '</div>'+
