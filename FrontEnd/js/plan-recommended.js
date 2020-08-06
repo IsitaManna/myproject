@@ -62,8 +62,10 @@ window.onload = function() {
                         '<a href='+imageBaseUrl+element.img+' target="_blank" >'+
                             '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</a>'+
-                        '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
+                        '<div class ="col-xs-8" style="margin-top: 4%;">'+
+                      '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
                       '</span>'+
+                      '</div>'+
                         '</div>'+
                     '</div>'+
                     '<div class="row">'+

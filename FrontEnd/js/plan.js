@@ -39,7 +39,7 @@ window.onload = function() {
     // console.log(settings);
     $.get(settings).done(function (response) {
        
-        console.log("response from Api ------",response,response) ;
+        console.log("response from Api ------",response,response.length) ;
         var columns='<div class = "row">',count=0;
         response.recommendation.forEach(element => {
             var id=element.id
@@ -71,7 +71,8 @@ window.onload = function() {
                         '</a>'+
                         '</div>'+
                         '<div class ="col-xs-4" style="margin-top: 4%;">'+
-                      
+                      '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
+                      '</span>'+
                       '</div>'+
                     '</div>'+
                     '<div class="row">'+
@@ -85,23 +86,20 @@ window.onload = function() {
                      '</select>'+
                         '</div>'+
                         '<div class ="col-xs-4">'+
-
                           '<a >'+
                           '<i onclick=forceDownload("'+imageBaseUrl+element.img+'","'+element.img+'") title="Download Image" class="fa fa-download" aria-hidden="true" style="font-size: 23px;float: right;color: blue;"></i>'+
                           '</a>'+
                         '</div>'+
                     '</div>'+
-                    
-                    '<div class="row">'+
-                      ' <div class ="col-xs-16">'+
-                      '<span><b>Dimesions :</b>'+dimdiv
-                      +' </span>'
-                      '</div>'+
-                    '</div>'+
+                    // '<div class="row">'+
+                    //   ' <div class ="col-xs-12">'+
+                    //   '<span><b>Dimesions :</b>'+dimdiv
+                    //   +' </span>'
+                    //   '</div>'+
+                    // '</div>'+
                ' </div>'+
             '</div>'+
         '</div>'
-        
         columns=columns+eachcolumn;
           
 
