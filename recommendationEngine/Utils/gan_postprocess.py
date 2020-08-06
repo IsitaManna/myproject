@@ -46,8 +46,11 @@ def place_text(img,clust, centers, tag_file):
     i = 1
     legends = []
     areas = [cv2.contourArea(c) for c in contours if cv2.contourArea(c) < 1000000]
-    max_contarea = max(areas)
-    print(max_contarea)
+    # max_contarea = max(areas)
+    # print(type(areas))
+    # print(max_contarea)
+    max_contarea=sum(areas)
+    # print(totarea)
     for c in contours:
         cont_area = cv2.contourArea(c)
         if cont_area < 100:

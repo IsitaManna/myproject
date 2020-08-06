@@ -48,6 +48,12 @@ window.onload = function() {
                 finalRow='<div class = "row" style="margin-top : 2%" >';
                 columns=columns+'</div>'+finalRow;
             }
+            var dimdiv="";
+            element.dim_dict.forEach(dim => {
+              console.log(dim);
+              dimdiv=dimdiv+'<span><b>'+dim.room+' :</b> '+dim.area_perc
+              +'% </span> <br> '
+            });
             var eachcolumn = '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">'+
             '<div class="card" >'+
                 '<div class="card-body" style="padding-bottom : 1px">'+
@@ -56,6 +62,8 @@ window.onload = function() {
                         '<a href='+imageBaseUrl+element.img+' target="_blank" >'+
                             '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</a>'+
+                        '<span><b style="font-size : 16px">Dimesions :</b><br>'+dimdiv+
+                      '</span>'+
                         '</div>'+
                     '</div>'+
                     '<div class="row">'+

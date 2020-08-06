@@ -83,17 +83,26 @@ class CollabFilteringRecommendView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        
         sim_list = find_similar_user(request.user)
         reco = find_similar_plan(sim_list)
-        reco = [
-            {
-                "img":r["image__image_path"],
-                "dist": r["rating__avg"],
-                "id": r["image_id"]
-            } for r in reco
-        ]
-        
+        records=[]
+        for r in reco:
+            dict1={}
+            dict1["img"]=r["image__image_path"]
+            dict1["dist"]=r["rating__avg"]
+            dict1['id']=r["image_id"]
+            dict1['dim_dict']=eval(OCRImage.objects.get(id=r["image_id"]).dim_dict)
+            records.append(dict1)
+        # reco = [
+        #     {
+        #         "img":r["image__image_path"],
+        #         "dist": r["rating__avg"],
+        #         "id": r["image_id"]
+        #     } for r in reco
+        # ]
+        # print(type(reco))
         return Response(
-            data={"recommendation": reco},
+            data={"recommendation": records},
             status=200
         )

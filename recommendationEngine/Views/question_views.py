@@ -13,7 +13,7 @@ class QuestionResponseView(APIView):
 
     def get(self, request):
         question_list = []
-        # print(request.user)
+        print(request.user)
         user_responses = UserResponse.objects.filter(user=request.user)
         # print(user_responses.filter(question_id=16)[1].__dict__['answer_id'])
         for question in Question.objects.all():
