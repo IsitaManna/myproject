@@ -100,6 +100,9 @@ class CollabFilteringRecommendView(APIView):
                 print("*******************************************************************")
                 print(r["image_id"])
                 print(OCRImage.objects.get(id=r["image_id"]).dim_dict)
+                if OCRImage.objects.get(id=r["image_id"]).dim_dict==None:
+                    print(True)
+                    dict1['dim_dict']=eval("NA")
                 print(type(OCRImage.objects.get(id=r["image_id"]).dim_dict))
                 print("*******************************************************************")
                 print("/n/n")
