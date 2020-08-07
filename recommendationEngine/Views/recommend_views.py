@@ -89,6 +89,7 @@ class CollabFilteringRecommendView(APIView):
         try:
             sim_list = find_similar_user(request.user)
             reco = find_similar_plan(sim_list)
+            print(reco)
             records=[]
             for r in reco:
                 dict1={}
