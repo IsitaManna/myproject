@@ -1,4 +1,7 @@
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -92,13 +95,13 @@ class CollabFilteringRecommendView(APIView):
                 dict1["img"]=r["image__image_path"]
                 dict1["dist"]=r["rating__avg"]
                 dict1['id']=r["image_id"]
-                print("/n/n")
-                print("*******************************************************************")
-                print(r["image_id"])
-                print(OCRImage.objects.get(id=r["image_id"]).dim_dict)
-                print(type(OCRImage.objects.get(id=r["image_id"]).dim_dict))
-                print("*******************************************************************")
-                print("/n/n")
+                logger.warning("/n/n")
+                logger.warning("*******************************************************************")
+                logger.warning(r["image_id"])
+                logger.warning(OCRImage.objects.get(id=r["image_id"]).dim_dict)
+                logger.warning(type(OCRImage.objects.get(id=r["image_id"]).dim_dict))
+                logger.warning("*******************************************************************")
+                logger.warning("/n/n")
                 dict1['dim_dict']=eval(OCRImage.objects.get(id=r["image_id"]).dim_dict)
                 records.append(dict1)
             # reco = [
