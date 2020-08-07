@@ -102,11 +102,13 @@ class CollabFilteringRecommendView(APIView):
                 print(OCRImage.objects.get(id=r["image_id"]).dim_dict)
                 if OCRImage.objects.get(id=r["image_id"]).dim_dict==None:
                     print(True)
-                    dict1['dim_dict']=eval("NA")
-                print(type(OCRImage.objects.get(id=r["image_id"]).dim_dict))
-                print("*******************************************************************")
-                print("/n/n")
-                dict1['dim_dict']=eval(OCRImage.objects.get(id=r["image_id"]).dim_dict)
+                    dim={"Room":"NA"}
+                    dict1['dim_dict']=eval(dim)    
+                    print(type(OCRImage.objects.get(id=r["image_id"]).dim_dict))
+                    print("*******************************************************************")
+                    print("/n/n")
+                else:
+                    dict1['dim_dict']=eval(OCRImage.objects.get(id=r["image_id"]).dim_dict)
                 records.append(dict1)
             # reco = [
             #     {
