@@ -29,7 +29,7 @@ window.onload = function() {
     };
     $.ajax(settings).done(function (response) {
 
-        // console.log("response from Api ------",response,response.length) ;
+        console.log("response from Api ------",response,response.length) ;
         questions=[]
         num_of_questions=response.length;
         var i=0;
@@ -68,7 +68,7 @@ window.onload = function() {
 
                     // }
                      if (element.Question.id == 16) {
-                        if (answer.id == element.User_Response.answer_id)
+                        if (element.User_Response.answer_id.includes(answer.id))
                             radio += '<input type="checkbox" checked="checked" name="radio' + element.Question.id + '" id="answer-' + answer.id + '" value="' + answer.answer + '">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="' + answer.answer + '">' + answer.answer + '</label><br>'
                         else
                             radio += '<input type="checkbox" name="radio' + element.Question.id + '" id="answer-' + answer.id + '" value="' + answer.answer + '">&nbsp;<label style="font-size: 14px;margin-left: 5px;" for="' + answer.answer + '">' + answer.answer + '</label><br>'
