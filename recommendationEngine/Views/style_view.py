@@ -66,7 +66,7 @@ class BedroomStyleView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if StyleImage.objects.get(id=request.data['id']).parent:
+        if StyleImage.objects.get(id=request.data['id']).parent_id:
             UserStyle.objects.update_or_create(
                     user=request.user,
                     defaults={'style_id': request.data['id']}
