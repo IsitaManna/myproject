@@ -41,7 +41,7 @@ def black_white(img):
 
 
 
-def place_text(img,clust, centers, tag_file):
+def place_text(img,clust, centers, tag_file,length,width):
     contours, _ = cv2.findContours(img.copy(), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_TC89_L1)
     i = 1
     legends = []
@@ -50,6 +50,7 @@ def place_text(img,clust, centers, tag_file):
     # print(type(areas))
     # print(max_contarea)
     max_contarea=sum(areas)
+    total_area=int(length)*int(width)
     # print(totarea)
     for c in contours:
         cont_area = cv2.contourArea(c)
@@ -68,7 +69,7 @@ def place_text(img,clust, centers, tag_file):
                 tag = get_tag(color, tag_file)
                 cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
                 leg['room']=str(i)
-                leg['area_perc']=tag+"-"+str(round((cont_area/max_contarea)*100, 2))
+                leg['area_perc']=tag+"-"+str(round((cont_area/total_area)*100, 2))
                 # leg['area_perc']={'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) }
                 legends.append(leg)
                 # legends.update({"room":str(i), "area_perc": str({'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) })})
@@ -76,8 +77,8 @@ def place_text(img,clust, centers, tag_file):
     return img, legends
 
 
-def gan_convert(img, tag_file):
+def gan_convert(img, tag_file,length,width):
     cluster_img, centers = cluster_image(img.copy())
     blkwht_img = black_white(cluster_img.copy())
-    final_img, legends = place_text(blkwht_img, cluster_img, centers, tag_file)
+    final_img, legends = place_text(blkwht_img, cluster_img, centers, tag_file,length,width)
     return final_img, legends

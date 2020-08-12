@@ -9,7 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from recommendationEngine.models import User, UserResponse, Rating, OCRImage
+from recommendationEngine.models import User, UserResponse, Rating, OCRImage,Answer
 from recommendationEngine.Utils.vectorize import (
     get_customer_reponse_vect,
     get_vector_distance,
@@ -23,11 +23,24 @@ class RecommendPlanView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        print("User id: ",request.user.id)
+        answer=UserResponse.objects.filter(user_id=request.user.id).filter(question_id=1).values_list('answer_id', flat=True)[0]
+        sqftarea=Answer.objects.filter(id=answer).values_list('answer', flat=True)[0]
+        print("Lower cap:",int(sqftarea.split('-')[0]))
+        lower_cap=int(sqftarea.split('-')[0])
         plans = OCRImage.objects.filter(user=request.user)
         li = []
+        dim_li=[]
+        for i in plans:
+            dim=eval(i.dim_dict)
+        # {'room': '1', 'area_perc': 'living room-18.87'}
+        for d in dim:
+            area=round(float(d['area_perc'].split('-')[-1])/100*lower_cap,2)
+            dim_li.append({'room':d['room'],'area_perc':d['area_perc'].split("-")[0]+'-'+str(area)})
+        # print(dim_li)
         for i in plans:
             print(eval(i.dim_dict))
-            li.append({"img": str(i.image_path),"dimension":eval(i.dim_dict), "dist": 3.0, "id": i.id})
+            li.append({"img": str(i.image_path),"dimension":dim_li, "dist": 3.0, "id": i.id})
         data = {
             "recommendation": li
         }

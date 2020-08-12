@@ -57,7 +57,7 @@ window.onload = function() {
             element.dimension.forEach(dim => {
               console.log(dim);
               dimdiv=dimdiv+'<span><b>'+dim.room+' :</b> '+dim.area_perc
-              +'% </span> <br> '
+              +' sqft. </span> <br> '
             });
             // -----------------------------------
             // --------each image column-----------
