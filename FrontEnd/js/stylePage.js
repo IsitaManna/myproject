@@ -92,7 +92,7 @@ function createStyleTab(){
                 row=row+'</div>'+newrow;
                 
             }
-            var eachcolumn='<div class="col-md-1 col-lg-1 col-sm-1 col-xs-1" id="img'+element.id+'" onclick="getlevel2Images('+element.id+')">'+
+            var eachcolumn='<div class="col-md-1 col-lg-1 col-sm-1 col-xs-1" id="img'+element.id+'"  onclick="selectImage('+element.id+')">'+
             '<a href="#level2">'+
                 '<img id="l1Image-'+element.id+'" src="'+imageBaseUrl+element.image_path+'" style="width: 100%; height:70%; border:1px solid; float : right;">'+
             ' </a>'+
@@ -167,21 +167,26 @@ function getlevel2Images(imageId){
 
 }
 function selectImage(id){
-    console.log("selected---");
-    
-    $('.selected').removeClass('selected');
-    $("#image-"+id).addClass('selected');
+    console.log("selected---",id);
+    $('.selectedImg').removeClass('selectedImg');
+    $("#l1Image-"+id).addClass('selectedImg');
     $("#planButton").removeAttr('disabled');
+
+    // $('.selected').removeClass('selected');
+    // $("#img-"+id).addClass('selected');
+    // $("#planButton").removeAttr('disabled');
 }
 
 function submitStyleChoice(){
-    var element=$('.selected').attr("id");
+    var element=$('.selectedImg').attr("id");
+    console.log("selected-->>",element);
     var id=element.split("-")[1];
     $('#overlay').fadeIn();
     console.log("Submitted!!!",id);
     var url = apiBackendBaseUrl + "/bedroom-style";
 
     var data={id:id};
+    console.log("---",data);
     var token = this.localStorage.getItem("token");
     var settings = {
       "url": url,
