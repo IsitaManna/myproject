@@ -36,7 +36,7 @@ window.onload = function() {
     // console.log(settings);
     $.ajax(settings).done(function (response) {
        
-        console.log("response from Api ------",response,response.length) ;
+        console.log("response from Api ------",response,response) ;
         var columns='<div class = "row">',count=0;
         response.recommendation.forEach(element => {
             var id=element.id
@@ -224,8 +224,6 @@ function forceDownload(url,fileName){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "blob";
-  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-  xhr.setRequestHeader("Access-Control-Allow-Methods", "*");
   xhr.onload = function(){
       var urlCreator = window.URL || window.webkitURL;
       var imageUrl = urlCreator.createObjectURL(this.response);
@@ -236,8 +234,8 @@ function forceDownload(url,fileName){
       tag.click();
       document.body.removeChild(tag);
   }
+  // xhr.setRequestHeader('Content-Type', 'image/png');
   
-  // console.log("header set");
   xhr.send();
 }
 
