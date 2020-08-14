@@ -82,18 +82,22 @@ class BedroomStyleView(APIView):
             width = UserStyle.objects.get(
                 user=request.user
             ).style.width
-            print("length,width: ",length,width)
+
+            bedrooms = UserStyle.objects.get(
+                user=request.user
+            ).style.bedroom
+
+            print("length,width,#bedrooms: ",length,width,bedrooms)
             files = {'file': open(image_pth, 'rb')} 
             req = requests.post(settings.GAN_HOST+'/input',files=files)
             print('#'*20)
-            # print(req.json())
-            # print(req)
+            # x,y=get_bedroom_pos(image_pth)
             get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'],stream=True).raw
             image = np.asarray(bytearray(get_image.read()), dtype="uint8")
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
             # plan,dim_list=convert_result(image)
             color_tag = pd.DataFrame(settings.PLAN_COLOR_DICT)
-            plan,dim_list = gan_convert(image, color_tag,length,width)
+            plan,dim_list = gan_convert(image, color_tag,length,width,bedrooms)
             plan=Image.fromarray(plan)
             buffer = BytesIO()
             plan.save(fp=buffer, format='png')

@@ -26,8 +26,11 @@ class RecommendPlanView(APIView):
         print("User id: ",request.user.id)
         answer=UserResponse.objects.filter(user_id=request.user.id).filter(question_id=1).values_list('answer_id', flat=True)[0]
         sqftarea=Answer.objects.filter(id=answer).values_list('answer', flat=True)[0]
-        print("Lower cap:",int(sqftarea.split('-')[0]))
-        lower_cap=int(sqftarea.split('-')[0])
+        print("Option Chosen:",sqftarea)
+        if sqftarea=="Less than 1000 sq. ft.":
+            lower_cap=int(sqftarea.split()[2])
+        else:
+            lower_cap=int(sqftarea.split('-')[0])
         plans = OCRImage.objects.filter(user=request.user)
         li = []
         dim_li=[]

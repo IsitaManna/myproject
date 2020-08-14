@@ -41,7 +41,7 @@ def black_white(img):
 
 
 
-def place_text(img,clust, centers, tag_file,length,width):
+def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     contours, _ = cv2.findContours(img.copy(), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_TC89_L1)
     i = 1
     legends = []
@@ -52,6 +52,8 @@ def place_text(img,clust, centers, tag_file,length,width):
     max_contarea=sum(areas)
     total_area=int(length)*int(width)
     # print(totarea)
+    tagsli=[]
+    bedcount=0
     for c in contours:
         cont_area = cv2.contourArea(c)
         if cont_area < 100:
@@ -66,19 +68,43 @@ def place_text(img,clust, centers, tag_file,length,width):
             leg={}
             min_rect = cv2.minAreaRect(c)
             if color_list in centers.tolist() and min(min_rect[1][1], min_rect[1][0]) > 20:
+                area_perc=round((cont_area/max_contarea)*100, 2)
                 tag = get_tag(color, tag_file)
-                cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
+                # cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
                 leg['room']=str(i)
-                leg['area_perc']=tag+"-"+str(round((cont_area/total_area)*100, 2))
+                leg['area_perc']=tag+"-"+str(area_perc)
                 # leg['area_perc']={'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) }
-                legends.append(leg)
+                print(leg)
+                # print(tag)
+                if (tag=='stair' and tag not in tagsli):
+                    # print("inside if")
+                    cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
+                    legends.append(leg)
+                    tagsli.append(tag)
+                else:
+                    if tag!='stair':
+                        # print("inside else")
+                        if area_perc>5:
+                            if tag=="bedroom":
+                                bedcount+=1
+                                if bedcount<=bedrooms:
+                                    cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
+                                    legends.append(leg)
+                            else:
+                                cv2.putText(img, str(i),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (0, 0, 0),thickness=3)
+                                legends.append(leg)
+                # print(tagsli)
                 # legends.update({"room":str(i), "area_perc": str({'tag': tag, 'area': round((cont_area/max_contarea)*100, 2) })})
                 i+=1
+    print(legends)
     return img, legends
 
 
-def gan_convert(img, tag_file,length,width):
+def gan_convert(img, tag_file,length,width,bedrooms):
     cluster_img, centers = cluster_image(img.copy())
     blkwht_img = black_white(cluster_img.copy())
-    final_img, legends = place_text(blkwht_img, cluster_img, centers, tag_file,length,width)
+    final_img, legends = place_text(blkwht_img, cluster_img, centers, tag_file,length,width,bedrooms)
     return final_img, legends
+
+# def get_bedroom_pos(image_pth):
+#     im=cv2.imread(image_pth)
