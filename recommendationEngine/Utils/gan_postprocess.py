@@ -81,7 +81,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
                 leg['room']=str(i)
                 leg['area_perc']=tag+"-"+str(area_perc)
                 if tag!='stair':
-                    if area_perc>3:
+                    if area_perc>5:
                         
                         if tag=="bedroom":
                             bedcount+=1
@@ -120,17 +120,17 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     tot_rooms=len(roomnames)+bedrooms
     for j in range(0,len(roomnames)):
         if (roomnames[j] not in tags) and (j<len(desc_area)):
-            i+=1
+            
             tags.append(roomnames[j])
             puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],roomnames[j],desc_area[j]]})
-
+            i+=1
     while (bedrooms-bedcount)!=0:
         if j <len(desc_area):
             tags.append("bedroom")
-            i+=1
             puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],"bedroom",desc_area[j]]})
             bedcount+=1
             j+=1
+            i+=1
         else:
             break
     area=[]
