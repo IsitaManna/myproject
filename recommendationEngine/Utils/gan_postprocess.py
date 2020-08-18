@@ -124,11 +124,14 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
             tags.append(roomnames[j])
             puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],roomnames[j],desc_area[j]]})
             i+=1
+    print("end for loop")
     while (bedrooms-bedcount)!=0:
+        print("inside while")
         if j <len(desc_area):
+            print("inside while if")
             tags.append("bedroom")
-            puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],"bedroom",desc_area[j]]})
             bedcount+=1
+            puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],"bedroom",desc_area[j]]})
             j+=1
             i+=1
         else:
@@ -167,10 +170,10 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     leg['room']=str(i)
     leg['area_perc']="planned_floor_area"+"-"+str(round(used_area_perc),2)
     final_legends.append(leg)
-    # print("**********************")
-    # print(puttextlabels)
-    # print(final_legends)
-    # print("*******************************")
+    print("**********************")
+    print(puttextlabels)
+    print(final_legends)
+    print("*******************************")
     return img, final_legends
 
 
