@@ -158,7 +158,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
                     cv2.putText(img, list(p.keys())[0],  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
                     
                     final_legends.append({"room":list(p.keys())[0],"area_perc":name+"-"+str(areaperc)})
-    print(puttextlabels)
+    print(final_legends)
     used_area_perc=0
     for l in final_legends:
         used_area_perc+=float(l['area_perc'].split('-')[-1])
@@ -166,12 +166,12 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     leg={}
     i+=1
     leg['room']=str(i)
-    leg['area_perc']="open_space"+"-"+str(round(unplanned_openspace),2)
+    leg['area_perc']="open_space"+"-"+str(round(unplanned_openspace,2))
     final_legends.append(leg)
     leg={}
     i+=1
     leg['room']=str(i)
-    leg['area_perc']="planned_floor_area"+"-"+str(round(used_area_perc),2)
+    leg['area_perc']="planned_floor_area"+"-"+str(round(used_area_perc,2))
     final_legends.append(leg)
     print("**********************")
     print(puttextlabels)
