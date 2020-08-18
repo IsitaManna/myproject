@@ -138,6 +138,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
         print(bedrooms-bedcount)
         # else:
         #     bedcount+=1
+    print("end while loop")
     area=[]
     for p in puttextlabels:
         area.append(list(p.values())[0][2])
@@ -157,7 +158,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
                     cv2.putText(img, list(p.keys())[0],  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
                     
                     final_legends.append({"room":list(p.keys())[0],"area_perc":name+"-"+str(areaperc)})
-
+    print(puttextlabels)
     used_area_perc=0
     for l in final_legends:
         used_area_perc+=float(l['area_perc'].split('-')[-1])
