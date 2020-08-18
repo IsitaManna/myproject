@@ -136,6 +136,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     for p in puttextlabels:
         area.append(list(p.values())[0][2])
     area.sort(reverse=True)
+    # print(puttextlabels)
     final_legends=[]
     for a in area:
         for p in puttextlabels:
@@ -161,8 +162,10 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     leg['room']=str(i)
     leg['area_perc']="planned_floor_area"+"-"+str(used_area_perc)
     final_legends.append(leg)
+    print("**********************")
     print(puttextlabels)
     print(final_legends)
+    print("*******************************")
     return img, final_legends
 
 
