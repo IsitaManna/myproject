@@ -160,17 +160,17 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     leg={}
     i+=1
     leg['room']=str(i)
-    leg['area_perc']="open_space"+"-"+str(unplanned_openspace)
+    leg['area_perc']="open_space"+"-"+str(round(unplanned_openspace),2)
     final_legends.append(leg)
     leg={}
     i+=1
     leg['room']=str(i)
-    leg['area_perc']="planned_floor_area"+"-"+str(used_area_perc)
+    leg['area_perc']="planned_floor_area"+"-"+str(round(used_area_perc),2)
     final_legends.append(leg)
-    print("**********************")
-    print(puttextlabels)
-    print(final_legends)
-    print("*******************************")
+    # print("**********************")
+    # print(puttextlabels)
+    # print(final_legends)
+    # print("*******************************")
     return img, final_legends
 
 
