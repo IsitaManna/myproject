@@ -127,6 +127,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     while (bedrooms-bedcount)!=0:
         if j <len(desc_area):
             tags.append("bedroom")
+            i+=1
             puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],"bedroom",desc_area[j]]})
             bedcount+=1
             j+=1
