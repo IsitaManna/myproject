@@ -135,6 +135,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
             i+=1
             print(i,j,bedcount,bedrooms)
         bedcount+=1
+        print(bedrooms-bedcount)
         # else:
         #     bedcount+=1
     area=[]
