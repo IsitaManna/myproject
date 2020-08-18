@@ -139,15 +139,19 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     area.sort(reverse=True)
     # print(puttextlabels)
     final_legends=[]
+    done=[]
     for a in area:
         for p in puttextlabels:
             if list(p.values())[0][2] == a:
                 name=str(list(p.values())[0][1])
                 areaperc=list(p.values())[0][2]
                 centroid=list(p.values())[0][0]
-                cv2.putText(img, list(p.keys())[0],  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
-                  
-                final_legends.append({"room":list(p.keys())[0],"area_perc":name+"-"+str(areaperc)})
+                
+                if areaperc not in done:
+                    done.append(areaperc)
+                    cv2.putText(img, list(p.keys())[0],  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
+                    
+                    final_legends.append({"room":list(p.keys())[0],"area_perc":name+"-"+str(areaperc)})
 
     used_area_perc=0
     for l in final_legends:
