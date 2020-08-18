@@ -41,7 +41,7 @@ class QuestionResponseView(APIView):
                         "answer_id": user_responses.filter(question=question)[0].__dict__['answer_id']
                     }
             else:
-                u_dict = {"answer_id": 0}
+                u_dict = {"answer_id": []}
             # print(u_dict)
             question_list.append(
                 {
