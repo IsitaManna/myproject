@@ -13,7 +13,7 @@ $(document).ready(function(){
           email : email,
           password : password 
         }
-        console.log(loginData);
+        // console.log(loginData);
         var emailValidationCheck = validateEmail(email);
           if(emailValidationCheck){
             var url = apiBackendBaseUrl + "/login-customer";
@@ -28,8 +28,15 @@ $(document).ready(function(){
             
             $.ajax(settings).done(function (response) {
               console.log("Response in login ----------",response.status,response);
-             
+              console.log(response["status"]);
               if(response["status"] == 404){
+                swal({
+                  title: "Error",
+                  text: response["message"],
+                  icon: "error",
+                });
+              }
+              if(response["status"] == 403){
                 swal({
                   title: "Error",
                   text: response["message"],
@@ -49,7 +56,8 @@ $(document).ready(function(){
                 });
                 window.location.href = "index.html";
               }
-            });
+          });
+            
           }
           else{
             swal({
@@ -58,6 +66,7 @@ $(document).ready(function(){
               icon: "error",
             });
           }
+          
        
     })
 })

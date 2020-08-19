@@ -80,7 +80,7 @@ class CustomerLoginView(APIView):
             status = 404
             message = "User email does not exist."
         response = {"status" : status,"message" : message}
-        return Response(data=response,status=status)
+        return Response(data=response)
 
 
 class CustomerResponseView(APIView):
