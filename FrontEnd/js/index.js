@@ -10,6 +10,7 @@ window.onload = function() {
     var name = this.localStorage.getItem("name");
     if(name == null){
         name = "";
+        window.location.replace("login-registration.html");
     }
     $(document).ready(function(){
         $("#username").html("Hi "+name);
