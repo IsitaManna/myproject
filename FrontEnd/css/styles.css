@@ -13,6 +13,8 @@
     padding: 2px 0px;
 
 }
+.nav-link:hover { color:#BADA55 !important; }
+
 .defaultBtn{
     background-color: #BADA55;
     color: #000000;
@@ -107,6 +109,14 @@ input[type=checkbox], input[type=radio]{
         padding: 5px 20px;
         cursor: pointer;
       }
+      /* .btn {
+        transition-duration: 0.4s;
+      }
+      
+      .btn:hover {
+        background-color: blueviolet; 
+        color: white;
+      } */
       .spinner {
           margin: 0 auto;
           height: 64px;
