@@ -27,7 +27,7 @@ class RecommendPlanView(APIView):
         answer=UserResponse.objects.filter(user_id=request.user.id).filter(question_id=1).values_list('answer_id', flat=True)[0]
         sqftarea=Answer.objects.filter(id=answer).values_list('answer', flat=True)[0]
         print("Option Chosen:",sqftarea)
-        if sqftarea=="Less than 1000 sq. ft.":
+        if (sqftarea=="Less than 1000 sq. ft.") or (sqftarea=="More than 3000 sq. ft."):
             lower_cap=int(sqftarea.split()[2])
         else:
             lower_cap=int(sqftarea.split('-')[0])
