@@ -66,7 +66,7 @@ window.onload = function() {
                         '<a href='+imageBaseUrl+element.img+' target="_blank" >'+
                             '<img title="click to open in new window" src='+imageBaseUrl+element.img+' alt="Chicago" style="width:300px; height:300px; float : right;">'+
                         '</a>'+
-                        '<div class ="col-xs-8" style="margin-top: 4%;">'+
+                        '<div class ="col-xs-8" style="margin-top: 2%;">'+
                       '<span><b style="font-size : 16px">Dimensions :</b><br>'+dimdiv+
                       '</span>'+
                       '</div>'+
@@ -74,7 +74,7 @@ window.onload = function() {
                     '</div>'+
                     '<div class="row">'+
                        ' <div class ="col-xs-8">'+
-                       '<select class="rate" id="example-'+element.id+'">'+
+                       '<select class="rate"  onchange="submitRating()" id="example-'+element.id+'">'+
                       ' <option value="1">1</option>'+
                        '<option value="2">2</option>'+
                        '<option value="3">3</option>'+
@@ -84,7 +84,7 @@ window.onload = function() {
                         '</div>'+
                         '<div class ="col-xs-4">'+
                           '<a>'+
-                          '<i title="Download Image" onclick=forceDownload("'+imageBaseUrl+element.img+'","'+element.img+'") class="fa fa-download" aria-hidden="true" style="font-size: 23px;float: right;color: blue;"></i>'+
+                          '<i title="Click to Download" onclick=forceDownload("'+imageBaseUrl+element.img+'","'+element.img+'") class="fa fa-download" aria-hidden="true" style="font-size: 23px;float: right;color: blue;"></i>'+
                           '</a>'+
                         '</div>'+
                     '</div>'+
@@ -154,15 +154,13 @@ window.onload = function() {
               console.log("response ---",response);
               if(response["status"] == 201){
     
-                // createJwtToken(1200,email);
                 swal({
                   title: "Success",
-                  text: "Your response has been submitted successfully!",
+                  text: "Thanks for rating!",
                   icon: "success",
-                }).then( function(){
-                  window.location.href = "stylePage.html";
-                 
-            });
+                  timer: 1500,
+                  buttons: false
+                });
             }
             else{
                 swal({
@@ -184,6 +182,10 @@ window.onload = function() {
     window.location.href = "login-registration.html";
 
 }
+function goToStylePage()
+{
+  window.location.href = "stylePage.html";
+}
 function displayTabContent(tabName)
 {
     console.log("-------Tab Name-------",tabName);
@@ -193,8 +195,8 @@ function displayTabContent(tabName)
         // $("#homeTab").append(spanTabText);
     }
     if(tabName == "planTab"){
-        // window.location.href = "plan.html";
-        $("#planTab").append(spanTabText);
+        window.location.href = "plan.html";
+        // $("#planTab").append(spanTabText);
     }
 }
 

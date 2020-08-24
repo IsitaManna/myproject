@@ -74,6 +74,7 @@ class BedroomStyleView(APIView):
             image_pth = UserStyle.objects.get(
                 user=request.user
             ).style.image_path.path
+            print("Style Image Path:",image_pth)
 
             length = UserStyle.objects.get(
                 user=request.user
@@ -89,7 +90,9 @@ class BedroomStyleView(APIView):
 
             print("length,width,#bedrooms: ",length,width,bedrooms)
             files = {'file': open(image_pth, 'rb')} 
+            # print(files)
             req = requests.post(settings.GAN_HOST+'/input',files=files)
+            print(req)
             print('#'*20)
             # x,y=get_bedroom_pos(image_pth)
             get_image = requests.get(settings.GAN_HOST+'/output/'+req.json()['image_path'],stream=True).raw

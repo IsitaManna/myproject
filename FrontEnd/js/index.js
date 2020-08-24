@@ -243,12 +243,12 @@ function submitResponse(){
           if(response["status"] == 201){
 
             // createJwtToken(1200,email);
-            swal({
-              title: "Success",
+            // swal({
+            //   title: "Success",
 
-              text: response["message"]+"!",
-              icon: "success",
-            }).then( function(){
+            //   text: response["message"]+"!",
+            //   icon: "success",
+            // }).then( function(){
                 window.location.href = "plan-recommended.html";
 
                 // createStyleTab();
@@ -257,7 +257,9 @@ function submitResponse(){
                 // $('#style').addClass('active show');
                 // $('#Styletab').addClass('active');
                 // $(this).scrollTop(0);
-          });
+          
+         
+        
 
         }
         else{

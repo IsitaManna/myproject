@@ -57,7 +57,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <!-- <img src="http://placehold.it/150x50?text=Logo" alt="" style="margin-top: -11%;"> -->
-					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" style="margin-top: -8%;">
+					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" style="margin-top: -8%;" onclick="displayTabContent('homeTab')"  >
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,9 +65,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto" style="float: right;">
                         <li class="nav-item active">
-                            <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
+                            <!-- <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
                                 
-                            </a>
+                            </a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color:  #6D7377;" id="planTab" onclick="displayTabContent('planTab')" href="#plan">Plan
@@ -88,6 +88,7 @@
         <div id="style" class="container tab-body" style="margin-top:1%;">
             <center>
                 <h3 style="font-weight: bold;">Choose The Style Of Floor Plan</h3>
+                <h2 style="color: #6D7377;"><small>Not happy with our recommended plans? No problem! You can create your own plan here.</small></h2>
             </center>
             <div class="card" >
                 <div class="card-body" style="padding-bottom : 1px" id="styleLevel1">
@@ -101,7 +102,9 @@
                </div>
             </div> -->
             <div class="text-center" style="margin-top: 2%;">
-                <button id="planButton" type="button" onclick="submitStyleChoice()" class="btn btn-success" disabled>Submit</button>
+                <button type="button" onclick="window.history.back()" class="btn btn-success">Back</button>
+                <button id="planButton" type="button" onclick="submitStyleChoice()" class="btn btn-success" disabled>Build Your House</button>
+
                 </div>
             <div id="overlay" style="display:none;">
                 <div class="spinner"></div>

@@ -81,7 +81,7 @@ window.onload = function() {
                     '</div>'+
                     '<div class="row">'+
                        ' <div class ="col-xs-8">'+
-                       '<select class="rate" id="example-'+element.id+'">'+
+                       '<select class="rate" onchange="submitRating()" id="example-'+element.id+'">'+
                       ' <option value="1">1</option>'+
                        '<option value="2">2</option>'+
                        '<option value="3">3</option>'+
@@ -170,14 +170,16 @@ window.onload = function() {
                 // createJwtToken(1200,email);
                 swal({
                   title: "Success",
-                  text: "Your response has been submitted successfully!",
+                  text: "Thanks for rating!",
                   icon: "success",
+                  timer: 1500,
+                  buttons: false
                 });
             }
             else{
                 swal({
                   title: "Error",
-                  text: "Your response could not be submitted. Please try again!",
+                  text: "Your rating could not be submitted. Please try again!",
                   icon: "error",
                 });
               }

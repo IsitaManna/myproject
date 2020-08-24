@@ -205,13 +205,13 @@ function submitStyleChoice(){
 
     
             // createJwtToken(1200,email);
-            swal({
-                title: "Success",
-                text: "Processed Successfully!",
-                icon: "success"
-              }).then( function(){
+            // swal({
+            //     title: "Success",
+            //     text: "Processed Successfully!",
+            //     icon: "success"
+            //   }).then( function(){
                     window.location.href = "plan.html";
-              });
+            //   });
         }
         else{
             swal({

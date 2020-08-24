@@ -124,9 +124,9 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
             tags.append(roomnames[j])
             puttextlabels.append({str(i):[centroids[areali.index(desc_area[j])],roomnames[j],desc_area[j]]})
             i+=1
-    print("end for loop")
+    # print("end for loop")
     while (bedrooms-bedcount)!=0:
-        print("inside while")
+        # print("inside while")
         if j <len(desc_area):
             print("inside while if")
             tags.append("bedroom")
@@ -135,7 +135,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
             i+=1
             print(i,j,bedcount,bedrooms)
         bedcount+=1
-        print(bedrooms-bedcount)
+        # print(bedrooms-bedcount)
         # else:
         #     bedcount+=1
     print("end while loop")
@@ -146,6 +146,7 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
     # print(puttextlabels)
     final_legends=[]
     done=[]
+    labelnum=1
     for a in area:
         for p in puttextlabels:
             if list(p.values())[0][2] == a:
@@ -155,28 +156,29 @@ def place_text(img,clust, centers, tag_file,length,width,bedrooms):
                 
                 if areaperc not in done:
                     done.append(areaperc)
-                    cv2.putText(img, list(p.keys())[0],  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
+                    cv2.putText(img, str(labelnum),  centroid, cv2.FONT_HERSHEY_SIMPLEX,1.5, (109, 111, 115),thickness=3)
                     
-                    final_legends.append({"room":list(p.keys())[0],"area_perc":name+"-"+str(areaperc)})
-    print(final_legends)
+                    final_legends.append({"room":str(labelnum),"area_perc":name+"-"+str(areaperc)})
+                    labelnum+=1
+    # print(final_legends)
     used_area_perc=0
     for l in final_legends:
         used_area_perc+=float(l['area_perc'].split('-')[-1])
     unplanned_openspace=100-used_area_perc
     leg={}
     i+=1
-    leg['room']=str(i)
+    leg['room']=str(labelnum)
     leg['area_perc']="open_space"+"-"+str(round(unplanned_openspace,2))
     final_legends.append(leg)
     leg={}
-    i+=1
-    leg['room']=str(i)
+    labelnum+=1
+    leg['room']=str(labelnum)
     leg['area_perc']="planned_floor_area"+"-"+str(round(used_area_perc,2))
     final_legends.append(leg)
-    print("**********************")
-    print(puttextlabels)
-    print(final_legends)
-    print("*******************************")
+    # print("**********************")
+    # print(puttextlabels)
+    # print(final_legends)
+    # print("*******************************")
     return img, final_legends
 
 

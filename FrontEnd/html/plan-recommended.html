@@ -56,7 +56,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <!-- <img src="http://placehold.it/150x50?text=Logo" alt="" style="margin-top: -11%;"> -->
-					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" style="margin-top: -9%;">
+					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" onclick="displayTabContent('homeTab')"  style="margin-top: -9%;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -64,9 +64,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto" style="float: right;">
                         <li class="nav-item active">
-                            <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
+                            <!-- <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
                                 
-                            </a>
+                            </a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color:  #6D7377;" id="planTab" onclick="displayTabContent('planTab')" href="#plan">Plan
@@ -86,20 +86,22 @@
         </nav>
         <div id="plan" class="container tab-body">
                 <center>
-                    <h2> <b>Recommended Plans</b> </h2>
-                    <h4 style="color: #6D7377;">Our Artificial Intelligence Engine has generated some initial plans for you to rate.
-                        <br> Don’t worry, there’s no wrong answer and you can always come back and make changes.</h4>
+                    <h2><mark> <b>User-to-user Recommendation</b></mark> </h2>
+                    <h3>People, having similar life-style as yours liked these floor plans: </h3>
+                    <h4 style="color: #6D7377;"><small>Our Artificial Intelligence Engine has recommended some initial plans for you to rate.
+                        <br> Don’t worry, there’s no wrong answer and you can always come back and make changes.</small></h4>
+                        <p>Take a moment to <kbd>click on the stars</kbd> to rate each plan.</p>
                 </center>
             <div class="tab-content">
                 <div id="size" class="tab-pane in active" style="margin-top:2%;">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                             <center>
-                                <h3 >Rate Recommended plans</h3>
+                                <p>Take a moment to <kbd>click on the stars</kbd> to rate each plan.</p>
                             </center>
                             
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="row">
                         <div class="container">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -226,7 +228,8 @@
                        
                 </div>
                 <div class="text-center" style="margin-top: 2%;">
-                    <button type="button" onclick="submitRating()" class="btn btn-success">Submit</button>
+                    <button type="button" onclick="window.history.back()" style="margin-right: 10%;" class="btn btn-success">Back</button>
+                    <button type="button" onclick="goToStylePage()" class="btn btn-success">Let AI Generate Your Floor Plan</button>
                     </div>
                
                     

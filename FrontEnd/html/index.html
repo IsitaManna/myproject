@@ -37,7 +37,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <!-- <img src="http://placehold.it/150x50?text=Logo" alt=""> -->
-					<img src="../images/laiout _small _logo.jpg" alt="laiout logo">
+					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" onclick="displayTabContent('homeTab')">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,9 +45,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" style="color: #6D7377;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
+                            <!-- <a class="nav-link" style="color: #6D7377;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
                                 <span class="sr-only">(current)</span>
-                            </a>
+                            </a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: #6D7377;" id="planTab" onclick="displayTabContent('planTab')" href="#plan">Plan</a>
@@ -80,7 +80,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                                     <center>
-                                        <h4 style="font-weight: bold;">Tell us about your requirements</h4>
+                                        <h4 style="font-weight: bold;">Tell us about your requirements for the AI-generation</h4>
                                     </center>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                                     <center>
-                                        <h4 style="font-weight: bold;">Tell us about your life-style</h4>
+                                        <h4 style="font-weight: bold;">Tell us about your life-style to get our Recommended Plans</h4>
                                     </center>
                                 </div>
                             </div>
@@ -148,6 +148,7 @@
                                 
                                     <span id="qualitative"></span>
                                     <div class="text-center">
+                                        <button type="button" onclick="window.history.back()" style="margin-right: 10%;" class="btn btn-success">Back</button>
                                         <button type="button" onclick="submitResponse()" class="btn btn-success">Submit</button>
                                         </div>
                                 </div>

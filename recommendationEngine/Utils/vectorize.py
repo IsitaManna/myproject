@@ -116,4 +116,4 @@ def find_similar_plan(simi_list):
     ).values('image__image_path', 'image_id').annotate(Avg('rating'))
     rating = list(rating)
     rating.sort(key=lambda x : x['rating__avg'], reverse=False)
-    return rating[:4]  # return top n images
+    return rating[:3]  # return top n images

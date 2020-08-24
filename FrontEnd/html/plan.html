@@ -57,7 +57,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <!-- <img src="http://placehold.it/150x50?text=Logo" alt="" style="margin-top: -11%;"> -->
-					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" style="margin-top: -9%;">
+					<img src="../images/laiout _small _logo.jpg" alt="laiout logo" onclick="displayTabContent('homeTab')"  style="margin-top: -9%;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,9 +65,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto" style="float: right;">
                         <li class="nav-item active">
-                            <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
+                            <!-- <a class="nav-link" style="color: #6D7377;;" id="homeTab" onclick="displayTabContent('homeTab')" href="#home">Home
                                 
-                            </a>
+                            </a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color:  #6D7377;" id="planTab" onclick="displayTabContent('planTab')" href="#plan">Plan
@@ -87,14 +87,14 @@
         </nav>
         <div id="plan" class="container tab-body">
             <center>
-                <h2> <b>Generated Floor Plans</b> </h2>
+                <h2> <b>AI-Generated Floor Plans</b> </h2>
             </center>
             <div class="tab-content">
                 <div id="size" class="tab-pane in active" style="margin-top:2%;">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
                             <center>
-                                <h3 >Rate Your Generated Plans</h3>
+                                <p>Take a moment to <kbd>click on the stars</kbd> to rate each plan.</p>
                             </center>
                             
                         </div>
@@ -104,7 +104,7 @@
                        
                 </div>
                 <div class="text-center" style="margin-top: 2%;">
-                    <button type="button" onclick="submitRating()" class="btn btn-success">Submit</button>
+                    <button type="button" onclick="window.history.back()" class="btn btn-success">Back</button>
                     </div>
                     
                     
