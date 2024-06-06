@@ -1,4 +1,4 @@
 var environments ={
-     apiBackendBaseUrl : "http://apilaiout.thirdeyedata.io/recommendation-engine",
-     imageBaseUrl : "http://apilaiout.thirdeyedata.io/media/"
+     apiBackendBaseUrl : " http://127.0.0.1:8000/recommendation-engine",
+     imageBaseUrl : " http://127.0.0.1:8000/media/"
 }

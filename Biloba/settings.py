@@ -32,7 +32,7 @@ else:
     DEBUG = True
 
 # ALLOWED_HOSTS = ["192.168.1.10", "localhost", "192.168.1.100","192.168.1.13","127.0.0.1"]
-ALLOWED_HOSTS = "*"
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ REST_FRAMEWORK = {
 
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',  
     'corsheaders',
     'recommendationEngine.apps.recommendationEngineConfig',
     'django.contrib.admin',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -97,10 +99,10 @@ WSGI_APPLICATION = 'Biloba.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
-        'NAME' : os.getenv('MYSQL_DB'),
-        'USER' : os.getenv('MYSQL_USER'),
-        'PASSWORD' : os.getenv('MYSQL_PASS'),
-        'HOST' : os.getenv('MYSQL_HOST'),
+        'NAME' : 'biloba',
+        'USER' : 'biloba',
+        'PASSWORD' : '$aJ@(`]Zx)pj2h3h',
+        'HOST' : 'localhost',
         'PORT' : '3306'
     }
 }
@@ -145,6 +147,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
 
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -252,5 +255,4 @@ PLAN_COLOR_DICT = [{'Floor tags': 'balcony/ porch', 'R': 77, 'G': 11, 'B': 65},
                 # {'Floor tags': 'hall', 'R': 63, 'G': 72, 'B': 204},
                 # {'Floor tags': 'linen', 'R': 225, 'G': 175, 'B': 166},
                 # {'Floor tags': 'Misc/cinema', 'R': 34, 'G': 177, 'B': 76}
-]
-
+                ]
